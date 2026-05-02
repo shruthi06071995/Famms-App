@@ -1,0 +1,135 @@
+/* Headings */
+.Heading {
+  background-color: #f7444e;
+  text-align: center;
+  color: #fff;
+  padding-top: 50px;
+  padding-bottom: 40px;
+  font: 16px "Montserrat", sans-serif;
+}
+
+.Heading h1 {
+  font-size: 42px;
+  font-weight: 800;
+}
+
+/* Products Page */
+.product-page {
+  margin-top: 20px;
+}
+
+.section-title {
+  position: relative;
+  margin-bottom: 0;
+  font-size: 3.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.product-page {
+  padding: 60px 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  /* margin-top: 40px; */
+}
+
+.section-title span {
+  color: #ff4d4d;
+}
+
+/* CARD STYLE */
+
+/* IMAGE FIX */
+/* .img-wrapper {
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f1f1;
+} */
+/* .product-card {
+  
+} */
+.product-card img {
+  max-height: 200px;
+  width: auto;
+}
+
+/* PRICE */
+.price {
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+
+/* IMAGE WRAPPER */
+.img-wrapper {
+  position: relative;
+  height: 350px;
+  overflow: hidden;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-wrapper img {
+  max-height: 250px;
+  transition: 0.4s ease;
+}
+
+/* 🔥 OVERLAY STYLE */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  transition: 0.4s ease;
+}
+
+/* SHOW ON HOVER */
+.img-wrapper:hover .overlay {
+  opacity: 1;
+}
+
+.img-wrapper:hover img {
+  transform: scale(1.1);
+}
+
+/* TEXT */
+.overlay h5 {
+  color: white;
+}
+
+.overlay .price {
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+/* BUTTON */
+.btn-add-to-cart {
+  background-color: #ff4d4d !important;
+  border: 1px;
+  padding: 15px 40px;
+  margin-top: 10px;
+}
+
+.btn-add-to-cart:hover {
+  background-color: black !important;
+  border: #f7444e !important;
+
+}

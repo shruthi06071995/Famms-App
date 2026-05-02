@@ -1,0 +1,28 @@
+.about-section {
+    align-items: center;
+    text-align: center;
+    padding: 50px 0;
+
+}
+
+.about-contain {
+    padding: 10px;
+}
+
+.about-section h1 {
+    font-size: 50px;
+}
+
+.about-row {
+    justify-content: center;
+}
+
+.about-card {
+    background-color: #002c3e;
+    color: #ffff !important;
+    height: 35vh;
+}
+
+.about-card img {
+    margin: 10px;
+}

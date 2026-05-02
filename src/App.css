@@ -1,0 +1,9 @@
+.search-input {
+  transition: 0.3s;
+  border-radius: 30px;
+}
+
+.search-input:focus {
+  box-shadow: 0 0 10px rgba(247, 68, 78, 0.5);
+  border-color: #f7444e;
+}

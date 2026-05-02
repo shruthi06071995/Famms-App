@@ -1,0 +1,419 @@
+* {
+    font-family: "Montserrat", sans-serif;
+}
+
+/* Custom Content Starts  */
+.custom-caption {
+    position: absolute !important;
+
+    top: 50% !important;
+    left: 10% !important;
+    transform: translateY(-50%) !important;
+
+    text-align: left !important;
+
+    right: auto !important;
+    bottom: auto !important;
+
+    width: 40%;
+    color: black;
+
+    font: 16px "Montserrat", sans-serif;
+}
+
+.custom-caption h1 {
+    font-size: 80px;
+    font-weight: bold;
+    color: #002c3e;
+    font-family: "Playfair", serif;
+    line-height: 0.8;
+}
+
+.custom-caption span {
+    color: #f7444e;
+    font-size: 85px;
+}
+
+.custom-caption p {
+    margin: 15px 0;
+    color: #555;
+    font-size: 19px;
+}
+
+.custom-caption button {
+    margin-top: 10px;
+    background-color: red;
+    border: none;
+    padding: 12px 45px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.7;
+}
+
+.custom-caption button:hover {
+    border: 1px solid #f7444e;
+    background-color: #c0bebe99;
+
+}
+
+.custom-slide {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    /* prevents cut */
+}
+
+.custom-img {
+    width: 100%;
+    margin-left: auto;
+    height: 100vh;
+}
+
+.dash-img {
+    height: 50px;
+    width: 100px;
+    position: relative;
+    bottom: 10px;
+    left: 10px;
+}
+
+.icon-img {
+    width: 50px;
+    height: 50px;
+}
+
+/* Custom Content ends  */
+
+/* ABOUT CONTENTS starts */
+.about-section {
+    align-items: center;
+    text-align: center;
+    padding: 50px 0;
+
+}
+
+.about-contain {
+    padding: 10px;
+}
+
+.about-section h1 {
+    font-size: 50px;
+}
+
+.about-row {
+    justify-content: center;
+}
+
+.about-card {
+    background-color: #002c3e;
+    color: #ffff !important;
+    height: 35vh;
+}
+
+.about-card img {
+    margin: 10px;
+}
+
+/* ABOUT CONTENTS ends */
+
+/* Arrival section Starts  */
+.arrival-section {
+    /* justify-content: center; */
+    background-color: #d4ced0;
+    /* object-fit: contain; */
+    /* display: flexbox; */
+    padding: 60px 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+.arrival-row {
+    object-fit: contain;
+    justify-content: center;
+}
+
+.arrival-img {
+    position: relative;
+    left: 25px;
+    width: 100px;
+}
+
+.arrival-content {
+    /* z-index: 1; */
+    /* position: relative;
+    right: 140px; */
+    text-align: left;
+}
+
+.arrival-content h1 {
+    color: #002c3e;
+    font-size: 2.5rem;
+    font-weight: 600px;
+}
+
+.arrival-content p {
+    color: #555;
+    font-size: 1rem;
+    padding: 5px;
+}
+.shop-btn {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    font-size: 16px;
+    border-radius: 4px;
+    width: fit-content;
+    transition: 0.3s ease;
+}
+.shop-btn:hover {
+    background-color: #e60023;
+}
+.arrival-row {
+    padding: 60px 0;
+}
+/* .arrival-content button {
+    background-color: #f7444e;
+    color: #ffff;
+    display: inline-block;
+    padding: 10px 45px;
+    border: none;
+} */
+
+/* arrival section ends */
+
+/* Product Section start  */
+.cart-icon {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+.cart-icon:hover {
+    color: #ff4d4d;
+}
+
+.product-section {
+    padding: 60px 0;
+    background: #fff;
+}
+
+/* TITLE */
+.section-title1 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.section-title1 {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.section-title1 span {
+    color: #ff4d4d;
+    border-bottom: 3px solid #ff4d4d;
+}
+
+/* CARD */
+.product-card {
+    border: none;
+    background: #f7f7f7;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+.product-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* IMAGE */
+.img-box {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-box img {
+    max-height: 180px;
+    object-fit: contain;
+}
+
+/* TEXT ROW */
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+/* PRICE */
+.price {
+    color: #002c3e;
+    font-weight: bold;
+}
+
+.view-btn {
+    background-color: #ff4d4d !important;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 45px;
+    margin-top: 20px;
+}
+
+.view-btn:hover {
+    background-color: #ac1616 !important;
+
+}
+
+/* Product section ends  */
+
+/* Subscribe Content Starts  */
+
+.subscribe {
+    background-color: #d4ced0;
+    padding: 70px 0 50px;
+    margin-top: 55px;
+}
+
+.subscribe-content {
+    justify-content: center;
+    text-align: center;
+}
+
+.subscribe-content h2 {
+    color: #002c3e;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 40px;
+}
+
+.subscribe-content p {
+    padding: 5px;
+    font-size: 18px;
+}
+
+.subscribe-content input {
+    padding: 10px 250px;
+    border-radius: 25px;
+    border: none;
+    margin-top: 15px;
+}
+
+.subscribe-content button {
+    background-color: #ff4d4d;
+    border: none;
+    padding: 10px 85px;
+    margin-top: 30px;
+    border-radius: 25px;
+    color: #f7f7f7;
+}
+
+.subscribe-content button:hover {
+    background-color: #d4ced0;
+    border: 1px solid #ff4d4d;
+    color: #ff4d4d;
+    font-weight: 700;
+}
+
+/* Subscribe Content Ends  */
+
+/* Testimonial Content starts  */
+
+/* HOVER EFFECT  */
+.custum-arrow:hover {
+    background-color: black;
+}
+
+/* Testimonial Content ends  */
+
+/* Last Section starts  */
+
+.footer-row {
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.last-section {
+    background: #f8f8f8;
+    padding: 60px 0;
+    margin-bottom: 0;
+    margin-top: 90px;
+}
+
+.last-section h3 {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.last-section a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    margin-bottom: 8px;
+}
+
+.last-section a:hover {
+    color: #f7444e;
+}
+
+.newsletter-box {
+    display: flex;
+    width: 100%;
+}
+
+.newsletter-box input {
+    flex: 1;
+    padding: 10px;
+}
+
+.newsletter-box button {
+    padding: 10px 20px;
+}
+
+/* Last Section ends  */
+
+/* Last Footer starts  */
+.last-footer {
+    background-color: #222;
+    justify-content: center;
+    text-align: center;
+    padding: 30px 0 10px;
+}
+.last-footer p {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+}
+.last-footer a {
+    color: #f7444e;
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration: none;
+}
+/* Last Footer Ends  */
+
+@media (max-width: 768px) {
+    .custom-slide {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .custom-caption {
+        width: 100%;
+        text-align: center;
+    }
+
+    .custom-img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+}

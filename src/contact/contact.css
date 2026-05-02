@@ -1,0 +1,60 @@
+* {
+    font-family: "Montserrat", sans-serif;
+}
+
+.heading {
+    background: #ff4d4d;
+    color: #fff;
+    text-align: center;
+    padding: 40px 0;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.contact-content {
+    display: flex;
+    justify-content: center;
+    margin: 60px 0;
+
+}
+
+.contact-content form {
+    width: 60%;
+}
+
+/* INPUTS */
+.contact-content input,
+.contact-content textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+/* TEXTAREA */
+.contact-content textarea {
+    height: 150px;
+}
+
+.contact-content small {
+    color: red;
+    display: block;
+    margin-top: -15px;
+    margin-bottom: 10px;
+}
+
+/* BUTTON */
+.contact-btn {
+    background: #333;
+    color: #fff;
+    padding: 12px 40px;
+    border: none;
+    display: block;
+    margin: 20px auto;
+    cursor: pointer;
+}
+
+.contact-btn:hover {
+    background: #ff4d4d;
+}
