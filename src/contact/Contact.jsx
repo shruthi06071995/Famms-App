@@ -54,7 +54,7 @@ const Contact = () => {
                             <Col md={5} className="arrival-content">
                                 <h1>#New Arrivals</h1>
                                 <p>Vitae fugiat laboriosam officia perferendis provident aliquid voluptatibus dolorem, fugit ullam sit earum id eaque nisi hic? Tenetur commodi, nisi, rem vel, ea eaque ab ipsa, autem similique ex unde!</p>
-                                <button>Shop Now</button>
+                                <button className="shop-btn mt-3">Shop Now</button>
                             </Col>
                         </Row>
                     </Container>
