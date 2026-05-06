@@ -12,6 +12,7 @@ import Search from "./search/Search";
 import Header from "./components/Header";
 import Full from "./footer/Full";
 import productsData from "./data/productsData";
+import Login from "./add-on/Login";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -57,6 +58,7 @@ function App() {
             />
           }
         />
+        <Route path="/login" element={<Login />} />
 
         {/* Nested Route */}
         <Route path="/pages">

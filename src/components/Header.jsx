@@ -14,7 +14,7 @@ function Header() {
     state => state.cart.cartItems
   );
 
-  return (  
+  return (
     <Navbar collapseOnSelect expand="lg" className="header-navbar ">
       <Container>
 
@@ -35,6 +35,8 @@ function Header() {
             <Nav.Link as={Link} to="/products">PRODUCTS</Nav.Link>
             <Nav.Link as={Link} to="/blog">BLOG</Nav.Link>
             <Nav.Link as={Link} to="/contact">CONTACT</Nav.Link>
+            <Nav.Link as={Link} to="/login">LOGIN</Nav.Link>
+
 
             {/* Nav-Icons */}
             <Nav.Link as={Link} to="/cart">
