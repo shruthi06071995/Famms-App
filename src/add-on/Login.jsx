@@ -8,6 +8,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
 
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,13 +19,14 @@ const Login = () => {
             return;
         }
 
-        // Dummy login condition
-        if (email === "admin@gmail.com" && password === "1234") {
-            setError("");
-            alert("Login Successful");
-        } else {
-            setError("Invalid Email or Password");
-        }
+        // Login success for any email/password
+        setError("");
+
+        // Clear fields
+        setEmail("");
+        setPassword("");
+
+        alert("Login Successful");
     };
 
     return (
