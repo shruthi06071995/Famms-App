@@ -26,7 +26,7 @@ function Header() {
 
         {/* Menu */}
         <Navbar.Collapse id="responsive-navbar-nav ">
-          <Nav className="mx-auto nav-menu ">
+          <Nav className="ms-auto nav-menu ">
             <Nav.Link style={{ color: "#f7444e" }} as={Link} to="/">HOME</Nav.Link>
             <NavDropdown title="PAGES" id="pages-dropdown">
               <NavDropdown.Item className='dropdown-items' as={Link} to="/pages/about">About</NavDropdown.Item>
