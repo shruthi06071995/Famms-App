@@ -35,7 +35,7 @@ function ProductCard({ product }) {
       </div>
 
       <Card.Body className="text-center">
-        <h5>{productName}</h5>
+        <h5>{product.title}</h5>
         <h6>Rs. {product.price}</h6>
       </Card.Body>
     </Card>
