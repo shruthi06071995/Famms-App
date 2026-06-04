@@ -36,14 +36,14 @@ const products = [
   },
   {
     id: 6,
-    title: "Women Stylish Dress Combo",
+    title: "Women Stylish Dresses",
     price: 3750,
     image: "p6.png",
     category: "women",
   },
   {
     id: 7,
-    title: "Women Stylish party Wear Dress",
+    title: "Women Stylish Dress",
     price: 5000,
     image: "p7.png",
     category: "women",
