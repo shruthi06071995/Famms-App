@@ -48,7 +48,7 @@ function Products({
         </h2>
 
         <Row className="mb-4">
-          <Col md={4}>
+          <Col md={4} sm={12} xs={12}>
             <Form.Control
               type="text"
               placeholder="Search product..."
@@ -57,7 +57,7 @@ function Products({
             />
           </Col>
 
-          <Col md={4}>
+          <Col md={4} xs={12} sm={12} >
             <Form.Select onChange={(e) => setSort(e.target.value)}>
               <option value="">Sort by Price</option>
               <option value="low">Low to High</option>
@@ -65,7 +65,7 @@ function Products({
             </Form.Select>
           </Col>
 
-          <Col md={4}>
+          <Col md={4} xs={12} sm={12}>
             <Form.Select onChange={(e) => setCategory(e.target.value)}>
               <option value="">All Categories</option>
               <option value="men">Men</option>
@@ -78,7 +78,7 @@ function Products({
         {!productsLoading && productsError && (
           <p className="text-center text-danger mt-4">{productsError}</p>
         )}
-        <Row className="g-4">
+        <Row className="products">
           {filteredProducts.map((prod) => (
             <Col md={3} sm={6} xs={12} key={prod.id}>
               <ProductCard product={prod} />
