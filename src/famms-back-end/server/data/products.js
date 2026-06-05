@@ -1,0 +1,88 @@
+const products = [
+  {
+    id: 1,
+    title: "Men Formal Shirt",
+    price: 550,
+    image: "p1.png",
+    category: "men",
+  },
+  {
+    id: 2,
+    title: "Black Stylish Jacket",
+    price: 1250,
+    image: "p2.png",
+    category: "men",
+  },
+  {
+    id: 3,
+    title: "Women Purple dress",
+    price: 3550,
+    image: "p3.png",
+    category: "women",
+  },
+  {
+    id: 4,
+    title: "Women Red Top",
+    price: 1550,
+    image: "p4.png",
+    category: "women",
+  },
+  {
+    id: 5,
+    title: "Women black dress",
+    price: 2350,
+    image: "p5.png",
+    category: "women",
+  },
+  {
+    id: 6,
+    title: "Women Stylish Dresses",
+    price: 3750,
+    image: "p6.png",
+    category: "women",
+  },
+  {
+    id: 7,
+    title: "Women Stylish Dress",
+    price: 5000,
+    image: "p7.png",
+    category: "women",
+  },
+  {
+    id: 8,
+    title: "Mens Casual Shirt",
+    price: 750,
+    image: "p8.png",
+    category: "men",
+  },
+  {
+    id: 9,
+    title: "Mens Stylish Shirt",
+    price: 550,
+    image: "p9.png",
+    category: "men",
+  },
+  {
+    id: 10,
+    title: "Mens stylish Shirt",
+    price: 660,
+    image: "p10.png",
+    category: "men",
+  },
+  {
+    id: 11,
+    title: "Mens Formal Shirt",
+    price: 450,
+    image: "p11.png",
+    category: "men",
+  },
+  {
+    id: 12,
+    title: "Women Party Dress",
+    price: 5650,
+    image: "p12.png",
+    category: "women",
+  },
+];
+
+export default products;
