@@ -11,8 +11,6 @@ function Products({
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const [category, setCategory] = useState("");
-  const [products, setProducts] = useState("");
-
 
   const filteredProducts = products
     .filter((prod) => {

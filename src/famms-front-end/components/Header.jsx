@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import logo from '../assets/logo.png'
+import logo from '../../assets/logo.png';
 import { FaShoppingCart, FaSearch } from "react-icons/fa";
 import './Header.css'
 import { Link } from 'react-router-dom';
@@ -25,7 +25,7 @@ function Header() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className='' />
 
         {/* Menu */}
-        <Navbar.Collapse id="responsive-navbar-nav ">
+        <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto nav-menu ">
             <Nav.Link style={{ color: "#f7444e" }} as={Link} to="/">HOME</Nav.Link>
             <NavDropdown title="PAGES" id="pages-dropdown">

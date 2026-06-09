@@ -1,15 +1,15 @@
 import express from "express";
-import products from "../../data/products.js";
+import productsData from "../../data/productsData.js";
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.json(products);
+  res.json(productsData);
 });
 
 router.get("/:id", (req, res) => {
-  const product = products.find(
-    (p) => p.id === Number(req.params.id)
+  const product = productsData.find(
+    (item) => item.id === Number(req.params.id)
   );
 
   if (!product) {

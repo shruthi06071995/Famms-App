@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import './contact.css';
-import arrival from '../assets/arrival.png'
+import arrival from '../../assets/arrival.png'
 import { Col, Container, Row } from "react-bootstrap";
 
 const Contact = () => {

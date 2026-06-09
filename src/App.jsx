@@ -11,8 +11,9 @@ import Full from "./famms-front-end/footer/Full";
 import Login from "./famms-front-end/add-on/Login";
 
 import productsData from "./famms-back-end/data/productsData";
-import { Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import ProductDetails from "./famms-front-end/products/ProductDetails";
+import { useEffect, useState } from "react";
 
 
 function App() {
@@ -30,10 +31,6 @@ function App() {
 
         if (!response.ok) {
           throw new Error("Failed to load products");
-        }
-
-        if (productsLoading) {
-          return <h2>Loading Products...</h2>;
         }
 
         const data = await response.json();

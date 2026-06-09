@@ -1,19 +1,19 @@
 import Carousel from "react-bootstrap/Carousel";
 import "./Home.css";
-import images from '../assets/slider.jpg'
+import images from '../../assets//slider.jpg';
 import { Button, Card, Col, Container, Form, Row, Stack } from "react-bootstrap";
-import truck from '../assets/truck.png'
-import free from '../assets/free.png'
-import award from '../assets/reward.png'
-import arrival from '../assets/arrival.png'
+import truck from '../../assets/truck.png';
+import free from '../../assets/free.png'
+import award from '../../assets/reward.png'
+import arrival from '../../assets/arrival.png'
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ProductCard from "../products/ProductCard";
 import { useState } from "react";
-import client from '../assets/client.jpg'
-import abc from '../assets/abc.jpeg'
-import male from '../assets/male.jpg'
-import logo from '../assets/logo.png'
+import client from '../../assets/client.jpg'
+import abc from '../../assets/abc.jpeg'
+import male from '../../assets/male.jpg'
+import logo from '../../assets/logo.png'
 
 function Home({ products = [], productsLoading, productsError }) {
     const cartItems = useSelector((state) => state.cart.cartItems);

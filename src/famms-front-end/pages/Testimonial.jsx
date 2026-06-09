@@ -1,5 +1,5 @@
 import { Carousel, Container } from "react-bootstrap";
-import client from '../assets/client.jpg'
+import client from '../../assets/client.jpg'
 import { useState } from "react";
 
 function Testimonial() {

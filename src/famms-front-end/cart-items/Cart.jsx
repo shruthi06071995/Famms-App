@@ -2,7 +2,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 function Cart() {
 
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector(
+    state => state?.cart?.cartItems || []
+  );
   const dispatch = useDispatch();
 
   // TOTAL PRICE 
@@ -28,12 +30,12 @@ function Cart() {
           >
             <div>
               <h6>{item.title}</h6>
-              <small>₹ {item.price} * {item.quantity  || 1}</small>
+              <small>₹ {item.price} * {item.quantity || 1}</small>
               <h6 className="mt-2">₹ {item.price * (item.quantity || 1)}</h6>
             </div>
 
             <div className="d-flex align-items-center gap-2">
-              
+
               {/* DECREMENT  */}
               <button
                 className="btn btn-sm btn-dark"
