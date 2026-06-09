@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/actions";
 import { Card, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ProductCard({ product }) {
   const dispatch = useDispatch();
@@ -22,6 +22,10 @@ function ProductCard({ product }) {
     <Card className="product-card">
       <div className="img-wrapper">
         <Card.Img variant="top" src={product.image} />
+
+        <Link to={`/products/${product.id}`}>
+          <h5>{product.title}</h5>
+        </Link>
 
         <div className="overlay">
           <Button className="btn-add-to-cart" onClick={handleAddToCart}>

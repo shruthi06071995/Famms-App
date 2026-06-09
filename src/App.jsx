@@ -1,18 +1,19 @@
-import "./App.css";
-import { useEffect, useState } from "react";
-import Home from "./home/Home";
-import { Routes, Route } from "react-router-dom";
-import About from "./pages/About";
-import Testimonial from "./pages/Testimonial";
-import Products from "./products/Products";
-import Blog from "./blog/Blog";
-import Contact from "./contact/Contact";
-import Cart from "./cart-items/Cart";
-import Search from "./search/Search";
-import Header from "./components/Header";
-import Full from "./footer/Full";
-import productsData from "./data/productsData";
-import Login from "./add-on/Login";
+import Home from "./famms-front-end/home/Home";
+import About from "./famms-front-end/pages/About";
+import Testimonial from "./famms-front-end/pages/Testimonial";
+import Products from "./famms-front-end/products/Products";
+import Blog from "./famms-front-end/blog/Blog";
+import Contact from "./famms-front-end/contact/Contact";
+import Cart from "./famms-front-end/cart-items/Cart";
+import Search from "./famms-front-end/search/Search";
+import Header from "./famms-front-end/components/Header";
+import Full from "./famms-front-end/footer/Full";
+import Login from "./famms-front-end/add-on/Login";
+
+import productsData from "./famms-back-end/data/productsData";
+import { Route } from "react-router-dom";
+import ProductDetails from "./famms-front-end/products/ProductDetails";
+
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -29,6 +30,10 @@ function App() {
 
         if (!response.ok) {
           throw new Error("Failed to load products");
+        }
+
+        if (productsLoading) {
+          return <h2>Loading Products...</h2>;
         }
 
         const data = await response.json();
@@ -76,6 +81,7 @@ function App() {
             />
           }
         />
+        <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />

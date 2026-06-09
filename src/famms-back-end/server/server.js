@@ -1,76 +1,37 @@
 import express from "express";
 import cors from "cors";
+import products from "../data/products.js";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/products", productRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/orders", orderRoutes);
+const users = [];
+const orders = [];
 
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
-
+// Get Products
 app.get("/api/products", (req, res) => {
   res.json(products);
 });
 
-// Add Product API 
-app.post("/products", (req, res) => {
-  products.push(req.body);
+// Add Product
+app.post("/api/products", (req, res) => {
+  const newProduct = {
+    id: products.length + 1,
+    ...req.body,
+  };
 
-  res.json({
+  products.push(newProduct);
+
+  res.status(201).json({
     message: "Product Added",
+    product: newProduct,
   });
 });
 
-// Add Update Product API 
-app.put("/products/:id", (req, res) => {
-  const id = Number(req.params.id);
-
-  const product = products.find((p) => p.id === id);
-
-  if (!product) {
-    return res.status(404).json({
-      message: "Product not found",
-    });
-  }
-
-  product.title = req.body.title;
-  product.price = req.body.price;
-
-  res.json({
-    message: "Product Updated",
-  });
-});
-
-// Add Delete Product API 
-app.delete("/products/:id", (req, res) => {
-  const id = Number(req.params.id);
-
-  const index = products.findIndex((p) => p.id === id);
-
-  if (index === -1) {
-    return res.status(404).json({
-      message: "Product not found",
-    });
-  }
-
-  products.splice(index, 1);
-
-  res.json({
-    message: "Product Deleted",
-  });
-});
-
-// Get Product Details 
-app.get("/products/:id", (req, res) => {
+// Get Product By ID
+app.get("/api/products/:id", (req, res) => {
   const id = Number(req.params.id);
 
   const product = products.find((p) => p.id === id);
@@ -84,9 +45,52 @@ app.get("/products/:id", (req, res) => {
   res.json(product);
 });
 
-// Filter Products 
-app.get("/filter", (req, res) => {
-  const category = req.query.category;
+// Update Product
+app.put("/api/products/:id", (req, res) => {
+  const id = Number(req.params.id);
+
+  const product = products.find((p) => p.id === id);
+
+  if (!product) {
+    return res.status(404).json({
+      message: "Product not found",
+    });
+  }
+
+  product.title = req.body.title ?? product.title;
+  product.price = req.body.price ?? product.price;
+  product.category = req.body.category ?? product.category;
+  product.image = req.body.image ?? product.image;
+
+  res.json({
+    message: "Product Updated",
+    product,
+  });
+});
+
+// Delete Product
+app.delete("/api/products/:id", (req, res) => {
+  const id = Number(req.params.id);
+
+  const index = products.findIndex((p) => p.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({
+      message: "Product not found",
+    });
+  }
+
+  const deletedProduct = products.splice(index, 1)[0];
+
+  res.json({
+    message: "Product Deleted",
+    product: deletedProduct,
+  });
+});
+
+// Filter Products
+app.get("/api/products/filter", (req, res) => {
+  const { category } = req.query;
 
   const filtered = products.filter(
     (p) => p.category === category
@@ -95,8 +99,8 @@ app.get("/filter", (req, res) => {
   res.json(filtered);
 });
 
-// Sort Products 
-app.get("/sort", (req, res) => {
+// Sort Products
+app.get("/api/products/sort", (req, res) => {
   const sorted = [...products].sort(
     (a, b) => a.price - b.price
   );
@@ -104,27 +108,17 @@ app.get("/sort", (req, res) => {
   res.json(sorted);
 });
 
-app.get("/sort", (req, res) => {
-  const sorted = [...products].sort(
-    (a, b) => a.price - b.price
-  );
-
-  res.json(sorted);
-});
-
-// User Authentication 
-
-// Register 
-app.post("/register", (req, res) => {
+// Register User
+app.post("/api/users/register", (req, res) => {
   users.push(req.body);
 
-  res.json({
+  res.status(201).json({
     message: "User Registered",
   });
 });
 
-// Login 
-app.post("/login", (req, res) => {
+// Login User
+app.post("/api/users/login", (req, res) => {
   const user = users.find(
     (u) =>
       u.email === req.body.email &&
@@ -142,8 +136,8 @@ app.post("/login", (req, res) => {
   });
 });
 
-// Admin Login 
-app.post("/admin/login", (req, res) => {
+// Admin Login
+app.post("/api/admin/login", (req, res) => {
   const { email, password } = req.body;
 
   if (
@@ -160,19 +154,23 @@ app.post("/admin/login", (req, res) => {
   });
 });
 
-// *Order API*
+// Create Order
+app.post("/api/orders", (req, res) => {
+  const newOrder = {
+    id: orders.length + 1,
+    ...req.body,
+  };
 
-// Create Order 
-app.post("/orders", (req, res) => {
-  orders.push(req.body);
+  orders.push(newOrder);
 
-  res.json({
+  res.status(201).json({
     message: "Order Created",
+    order: newOrder,
   });
 });
 
-// Get Order 
-app.get("/orders", (req, res) => {
+// Get Orders
+app.get("/api/orders", (req, res) => {
   res.json(orders);
 });
 
