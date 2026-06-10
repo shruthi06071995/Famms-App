@@ -37,8 +37,11 @@ function Products({
           Our <span>Product</span>
         </h2>
 
-        <Row className="mb-4">
-          <Col md={4} sm={12} xs={12}>
+        <Row className="mb-4 g-3">
+          <Col lg={3}
+            md={4}
+            sm={6}
+            xs={12}>
             <Form.Control
               type="text"
               placeholder="Search product..."
@@ -47,7 +50,10 @@ function Products({
             />
           </Col>
 
-          <Col md={4} xs={12} sm={12} >
+          <Col lg={3}
+            md={4}
+            sm={6}
+            xs={12}>
             <Form.Select onChange={(e) => setSort(e.target.value)}>
               <option value="">Sort by Price</option>
               <option value="low">Low to High</option>
@@ -55,7 +61,10 @@ function Products({
             </Form.Select>
           </Col>
 
-          <Col md={4} xs={12} sm={12}>
+          <Col lg={3}
+            md={4}
+            sm={6}
+            xs={12}>
             <Form.Select onChange={(e) => setCategory(e.target.value)}>
               <option value="">All Categories</option>
               <option value="men">Men</option>

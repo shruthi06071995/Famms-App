@@ -15,23 +15,24 @@
     right: auto !important;
     bottom: auto !important;
 
-    width: 40%;
+    width: 50%;
+    max-width: 600px;
     color: black;
 
     font: 16px "Montserrat", sans-serif;
 }
 
 .custom-caption h1 {
-    font-size: 80px;
+    font-size: clamp(40px, 6vw, 72px);
     font-weight: bold;
     color: #002c3e;
     font-family: "Playfair", serif;
-    line-height: 0.8;
+    line-height: 1.1;
 }
 
 .custom-caption span {
     color: #f7444e;
-    font-size: 85px;
+    font-size: inherit;
 }
 
 .custom-caption p {
@@ -120,10 +121,7 @@
 
 /* Arrival section Starts  */
 .arrival-section {
-    /* justify-content: center; */
     background-color: #d4ced0;
-    /* object-fit: contain; */
-    /* display: flexbox; */
     padding: 60px 0;
     font-family: "Montserrat", sans-serif;
 }
@@ -140,9 +138,6 @@
 }
 
 .arrival-content {
-    /* z-index: 1; */
-    /* position: relative;
-    right: 140px; */
     text-align: left;
 }
 
@@ -157,6 +152,7 @@
     font-size: 1rem;
     padding: 5px;
 }
+
 .shop-btn {
     background-color: #ff4d4d;
     color: #fff;
@@ -167,19 +163,14 @@
     width: fit-content;
     transition: 0.3s ease;
 }
+
 .shop-btn:hover {
     background-color: #e60023;
 }
+
 .arrival-row {
     padding: 60px 0;
 }
-/* .arrival-content button {
-    background-color: #f7444e;
-    color: #ffff;
-    display: inline-block;
-    padding: 10px 45px;
-    border: none;
-} */
 
 /* arrival section ends */
 
@@ -208,11 +199,11 @@
 }
 
 .section-title1 {
-  text-align: center;
-  font-size: 40px;
-  font-weight: bold;
-  margin-bottom: 50px;
-  margin-top: 50px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 .section-title1 span {
@@ -386,34 +377,69 @@
     text-align: center;
     padding: 30px 0 10px;
 }
+
 .last-footer p {
     color: #fff;
     font-size: 15px;
     font-weight: 400;
 }
+
 .last-footer a {
     color: #f7444e;
     font-size: 15px;
     font-weight: 400;
     text-decoration: none;
 }
+
 /* Last Footer Ends  */
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .custom-slide {
-        flex-direction: column;
         height: auto;
-    }
-
-    .custom-caption {
-        width: 100%;
-        text-align: center;
+        min-height: 700px;
     }
 
     .custom-img {
         width: 100%;
-        height: auto;
-        object-fit: contain;
+        height: 700px;
+        object-fit: cover;
     }
 
+    .custom-caption {
+        width: 80%;
+        left: 10% !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .custom-caption {
+        width: 90%;
+        left: 5% !important;
+        top: 50%;
+    }
+
+    .custom-caption h1 {
+        font-size: 32px;
+    }
+
+    .custom-caption p {
+        font-size: 14px;
+    }
+
+    .custom-img {
+        height: 70vh;
+        object-fit: cover;
+    }
+}
+
+@media (max-width:576px) {
+
+    .custom-caption h1 {
+        font-size: 28px;
+    }
+
+    .custom-caption button {
+        width: 100%;
+    }
 }

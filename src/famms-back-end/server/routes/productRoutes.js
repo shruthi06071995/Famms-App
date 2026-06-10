@@ -1,24 +1,56 @@
 import express from "express";
-import productsData from "../../data/productsData.js";
+
+import {
+  getProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  searchProducts
+}
+  from "../controllers/productController.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json(productsData);
-});
+router.get("/", getProducts);
 
-router.get("/:id", (req, res) => {
-  const product = productsData.find(
-    (item) => item.id === Number(req.params.id)
+router.get("/:id", getProductById);
+
+router.post("/", createProduct);
+
+router.put("/:id", updateProduct);
+
+router.delete("/:id", deleteProduct);
+
+router.get("/search", searchProducts);
+
+router.get("/sort/price", (req, res) => {
+
+  const order = req.query.order;
+
+  const sorted = [...products].sort(
+    (a, b) =>
+      order === "desc"
+        ? b.price - a.price
+        : a.price - b.price
   );
 
-  if (!product) {
-    return res.status(404).json({
-      message: "Product not found",
-    });
-  }
+  res.json(sorted);
 
-  res.json(product);
+});
+
+router.get("/filter/category", (req, res) => {
+
+  const category = req.query.category;
+
+  const filtered = products.filter(
+    p =>
+      p.category.toLowerCase()
+      === category.toLowerCase()
+  );
+
+  res.json(filtered);
+
 });
 
 export default router;
