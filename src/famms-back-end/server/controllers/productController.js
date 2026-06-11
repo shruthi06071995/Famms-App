@@ -1,4 +1,4 @@
-import products from "../../data/products.js";
+import products from "../../data/productsData.js";
 
 export const getProducts = (req, res) => {
   res.json(products);
@@ -77,15 +77,33 @@ export const deleteProduct = (req, res) => {
 }
 
 export const searchProducts = (req, res) => {
+  const keyword = req.query.keyword || "";
 
-  const search = req.query.search;
-
-  const result = products.filter(
-    p =>
-      p.title.toLowerCase()
-        .includes(search.toLowerCase())
+  const filteredProducts = products.filter((product) =>
+    (product.title || "")
+      .toLowerCase()
+      .includes(keyword.toLowerCase())
   );
 
-  res.json(result);
+  res.json(filteredProducts);
+};
 
-}
+export const filterProducts = (req, res) => {
+  const { category } = req.query;
+
+  const filteredProducts = products.filter(
+    product =>
+      product.category.toLowerCase() ===
+      category.toLowerCase()
+  );
+
+  res.json(filteredProducts);
+};
+
+export const sortProducts = (req, res) => {
+  const sortedProducts = [...products].sort(
+    (a, b) => a.price - b.price
+  );
+
+  res.json(sortedProducts);
+};
