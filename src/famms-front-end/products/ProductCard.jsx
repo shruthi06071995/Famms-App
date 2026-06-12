@@ -21,10 +21,11 @@ function ProductCard({ product }) {
   return (
     <Card className="product-card">
       <div className="img-wrapper">
-        <Card.Img variant="top" src={product.image} />
-
         <Link to={`/products/${product.id}`}>
-          <h5>{product.title}</h5>
+          <Card.Img
+            variant="top"
+            src={product.image}
+          />
         </Link>
 
         <div className="overlay">
@@ -39,7 +40,12 @@ function ProductCard({ product }) {
       </div>
 
       <Card.Body className="text-center">
-        <h5>{product.title}</h5>
+        <Link
+          to={`/products/${product.id}`}
+          className="text-decoration-none text-dark"
+        >
+          <h5>{product.title}</h5>
+        </Link>
         <h6>Rs. {product.price}</h6>
       </Card.Body>
     </Card>

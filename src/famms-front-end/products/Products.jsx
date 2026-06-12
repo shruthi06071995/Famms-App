@@ -18,10 +18,9 @@ function Products({
     fetch("http://localhost:5000/api/products")
       .then(res => res.json())
       .then(data => setProducts(data))
-      .catch(err => console.log(err));
   }, []);
 
-  const filteredProducts = products
+  const filteredProducts = productsData
     .filter((prod) => {
       const productName = (prod.title || prod.name || "").toLowerCase();
       return productName.includes(search.toLowerCase());
@@ -88,7 +87,12 @@ function Products({
         )}
         <Row className="products">
           {filteredProducts.map((prod) => (
-            <Col md={3} sm={6} xs={12} key={prod.id}>
+            <Col xl={3}
+              lg={3}
+              md={4}
+              sm={6}
+              xs={12}
+              key={prod.id}>
               <ProductCard product={prod} />
             </Col>
           ))}
