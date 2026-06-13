@@ -3,7 +3,7 @@ import client from '../../assets/client.jpg'
 import { useState } from "react";
 
 function Testimonial() {
-    const [index, setIndex] = useState();
+    const [index, setIndex] = useState(0);
 
     const handleSelect = (selectedIndex) => {
         setIndex(selectedIndex);

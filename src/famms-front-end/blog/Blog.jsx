@@ -2,6 +2,7 @@ import { Container, Card, Col, Row } from "react-bootstrap";
 import truck from '../../assets/truck.png';
 import free from '../../assets/free.png';
 import award from '../../assets/reward.png';
+import "../blog/Blog.css"
 
 function Blog() {
     return (

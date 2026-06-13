@@ -15,15 +15,15 @@
     right: auto !important;
     bottom: auto !important;
 
-    width: 50%;
-    max-width: 600px;
+    width: 45%;
+    max-width: 550px;
     color: black;
 
     font: 16px "Montserrat", sans-serif;
 }
 
 .custom-caption h1 {
-    font-size: clamp(40px, 6vw, 72px);
+    font-size: clamp(32px, 5vw, 60px);
     font-weight: bold;
     color: #002c3e;
     font-family: "Playfair", serif;
@@ -38,7 +38,8 @@
 .custom-caption p {
     margin: 15px 0;
     color: #555;
-    font-size: 19px;
+    font-size: 16px;
+    line-height: 1.7;
 }
 
 .custom-caption button {
@@ -53,23 +54,21 @@
 }
 
 .custom-caption button:hover {
+    background: transparent;
+    color: #f7444e;
     border: 1px solid #f7444e;
-    background-color: #c0bebe99;
-
 }
 
 .custom-slide {
-    display: flex;
-    align-items: center;
-    height: 100vh;
+    position: relative;
+    height: 90vh;
     overflow: hidden;
-    /* prevents cut */
 }
 
-.custom-img {
+.custom-image {
     width: 100%;
-    margin-left: auto;
     height: 100vh;
+    object-fit: cover;
 }
 
 .dash-img {
@@ -91,12 +90,8 @@
 .about-section {
     align-items: center;
     text-align: center;
-    padding: 50px 0;
-
-}
-
-.about-contain {
-    padding: 10px;
+    padding: 80px 0;
+    background: #ffffff;
 }
 
 .about-section h1 {
@@ -105,16 +100,42 @@
 
 .about-row {
     justify-content: center;
+    align-items: stretch;
+}
+
+.about-row .card {
+    border: none;
+    height: 100%;
+}
+
+.about-row .col-lg-4,
+.about-row .col-md-6,
+.about-row .col-sm-12 {
+    margin-bottom: 20px;
 }
 
 .about-card {
     background-color: #002c3e;
-    color: #ffff !important;
-    height: 35vh;
+    color: #fff !important;
+    padding: 40px 25px;
+    min-height: 280px;
+    height: 100%;
+    border-radius: 5px;
 }
 
 .about-card img {
     margin: 10px;
+}
+
+.about-card .card-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.about-card .card-text {
+    font-size: 15px;
+    line-height: 1.7;
 }
 
 /* ABOUT CONTENTS ends */
@@ -132,9 +153,12 @@
 }
 
 .arrival-img {
-    position: relative;
-    left: 25px;
-    width: 100px;
+    text-align: center;
+}
+
+.arrival-img img {
+    width: 100%;
+    max-width: 600px;
 }
 
 .arrival-content {
@@ -175,6 +199,11 @@
 /* arrival section ends */
 
 /* Product Section start  */
+.card {
+    border: none !important;
+    background: transparent !important;
+}
+
 .cart-icon {
     text-decoration: none;
     font-weight: bold;
@@ -191,22 +220,14 @@
 }
 
 /* TITLE */
-.section-title1 {
+.section-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: #002c3e;
     text-align: center;
-    font-size: 40px;
-    font-weight: bold;
-    margin-bottom: 40px;
 }
 
-.section-title1 {
-    text-align: center;
-    font-size: 40px;
-    font-weight: bold;
-    margin-bottom: 50px;
-    margin-top: 50px;
-}
-
-.section-title1 span {
+.section-title span {
     color: #ff4d4d;
     border-bottom: 3px solid #ff4d4d;
 }
@@ -217,6 +238,54 @@
     background: #f7f7f7;
     padding: 20px;
     transition: 0.3s;
+}
+
+/* Products grid */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+/* Card styles */
+.product-card {
+    background: #fff;
+    border-radius: 8px;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.product-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.price {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #f7444e;
+}
+
+.btn-add-to-cart {
+    background: #f7444e;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-add-to-cart:hover {
+    background: #d63c45;
 }
 
 .product-card:hover {
@@ -291,10 +360,9 @@
 }
 
 .subscribe-content input {
-    padding: 10px 250px;
-    border-radius: 25px;
-    border: none;
-    margin-top: 15px;
+    width: 100%;
+    max-width: 550px;
+    padding: 12px 20px;
 }
 
 .subscribe-content button {
@@ -399,8 +467,7 @@
         min-height: 700px;
     }
 
-    .custom-img {
-        width: 100%;
+    .custom-image {
         height: 700px;
         object-fit: cover;
     }
@@ -416,20 +483,28 @@
     .custom-caption {
         width: 90%;
         left: 5% !important;
-        top: 50%;
     }
 
     .custom-caption h1 {
-        font-size: 32px;
+        font-size: 34px;
     }
 
     .custom-caption p {
         font-size: 14px;
+        line-height: 1.6;
     }
 
-    .custom-img {
-        height: 70vh;
-        object-fit: cover;
+    .arrival-content {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .about-card {
+        margin-bottom: 20px;
+    }
+
+    .subscribe-content h2 {
+        font-size: 28px;
     }
 }
 

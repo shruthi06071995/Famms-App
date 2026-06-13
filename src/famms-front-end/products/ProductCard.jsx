@@ -19,7 +19,7 @@ function ProductCard({ product }) {
   };
 
   return (
-    <Card className="product-card">
+    <Card className="product-card h-100">
       <div className="img-wrapper">
         <Link to={`/products/${product.id}`}>
           <Card.Img

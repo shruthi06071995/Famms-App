@@ -20,7 +20,7 @@ function Products({
       .then(data => setProducts(data))
   }, []);
 
-  const filteredProducts = productsData
+  const filteredProducts = products
     .filter((prod) => {
       const productName = (prod.title || prod.name || "").toLowerCase();
       return productName.includes(search.toLowerCase());

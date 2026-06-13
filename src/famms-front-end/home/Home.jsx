@@ -1,6 +1,6 @@
 import Carousel from "react-bootstrap/Carousel";
 import "./Home.css";
-import images from '../../assets//slider.jpg';
+import images from "../../assets/slider.jpg";
 import { Button, Card, Col, Container, Form, Row, Stack } from "react-bootstrap";
 import truck from '../../assets/truck.png';
 import free from '../../assets/free.png'
@@ -17,7 +17,7 @@ import logo from '../../assets/logo.png'
 
 function Home({ products = [], productsLoading, productsError }) {
     const cartItems = useSelector((state) => state.cart.cartItems);
-    const [index, setIndex] = useState();
+    const [index, setIndex] = useState(0);
 
     // TOTAL COUNT 
     const totalQty = cartItems.reduce(
@@ -52,6 +52,7 @@ function Home({ products = [], productsLoading, productsError }) {
 
     return (
         <>
+        {/* First Section Content Starts  */}
             <Carousel>
 
                 <Carousel.Item>
@@ -108,6 +109,7 @@ function Home({ products = [], productsLoading, productsError }) {
                     </div>
                 </Carousel.Item>
             </Carousel>
+            {/* First Section Content Ends  */}
 
             {/* BLOG  SECTION STARTS  */}
             <section className="about-section">
@@ -158,6 +160,7 @@ function Home({ products = [], productsLoading, productsError }) {
                     </div>
                 </Container>
             </section>
+            {/* BLOG  SECTION ENDS  */}
 
             {/* Arrival Section  */}
             <section className="arrival-section">
@@ -183,7 +186,7 @@ function Home({ products = [], productsLoading, productsError }) {
                         <h2 className="section-title1">Our <span>Product</span></h2>
                         <Row className="g-4">
                             {products.map((prod) => (
-                                <Col md={3} sm={6} xs={12} key={prod.id}>
+                                <Col lg={3} md={4} sm={6} xs={12} key={prod.id}>
                                     <ProductCard product={prod} />
                                 </Col>
                             ))}
@@ -263,67 +266,6 @@ function Home({ products = [], productsLoading, productsError }) {
             </section>
             {/* Testimonial Section ends  */}
 
-            {/* Final Content starts */}
-            {/* <section className="last-section">
-                <Container>
-                    <Row className="footer-row"> */}
-
-                        {/* Column 1  */}
-                        {/* <Col md={4}>
-                            <div>
-                                <a href="#"><img src={logo} alt="logo" width="190px" /></a>
-                                <p><b>ADDRESS:</b> 28 White tower, Street Name New Delhi, INDIA</p>
-                                <p><b>TELEPHONE:</b> +91 9234 5678 99</p>
-                                <p><b>EMAIL:</b> FammsIndia@gmail.com</p>
-                            </div>
-                        </Col> */}
-
-                        {/* Column 2  */}
-                        {/* <Col md={2}>
-                            <h3>MENU</h3>
-                            <Link to="/">Home</Link>
-                            <Link to="/about" >About</Link>
-                            <a href="#services">Services</a>
-                            <a href="#testimonial">Testimonial</a>
-                            <a href="#blog">Blog</a>
-                            <a href="#contact">Contact</a>
-                        </Col> */}
-
-                        {/* Column 3 */}
-                        {/* <Col md={2}>
-                            <h3>ACCOUNT</h3>
-                            <a href="#account">Account</a>
-                            <a href="#checkout">Checkout</a>
-                            <a href="#login">Login</a>
-                            <a href="#register">Register</a>
-                            <a href="#shopping">Shopping</a>
-                            <a href="#widget">Widget</a>
-                        </Col> */}
-
-                        {/* Column 4 */}
-                        {/* <Col md={4}>
-                            <h3>NEWSLETTER</h3>
-                            <p>Subscribe to our newsletter and get update notification</p>
-
-                            <div className="newsletter-box">
-                                <Form.Control
-                                    type="email"
-                                    placeholder="Enter Your Email"
-                                />
-                                <Button variant="danger">Subscribe</Button>
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </section> */}
-            {/* Final Content Ends  */}
-
-            {/* Footer section starts  */}
-            {/* <footer className="last-footer">
-                <p>© 2022 All Rights Reserved</p>
-                <p>Distributed By <a href="#">ThemeWagon</a></p>
-            </footer> */}
-            {/* Footer Section Ends  */}
         </>
     );
 }

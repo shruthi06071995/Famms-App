@@ -10,22 +10,10 @@
     padding-top: 40px;
     padding-bottom: 40px;
     font: 45px "Montserrat", sans-serif;
-    font-weight: bolder;
+    font-size: 38px;
+    font-weight: 700;
 }
 
-.testi-heading h1 {
-    text-align: center;
-    justify-content: center;
-    margin-top: 60px;
-    font: 45px "Playfair", serif;
-}
-
-/* .slide img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    margin-bottom: 15px;
-} */
 
 .slide h4 {
     font-weight: bold;
@@ -71,8 +59,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 600px;
+    max-width: 700px;
     margin: auto;
+    padding: 0 20px;
 }
 
 .testimonial-content h4 {
@@ -107,11 +96,10 @@
 .custom-arrow {
     position: absolute;
     top: 50%;
-    transform: translateY(-150%);
+    transform: translateY(-50%);
     background-color: #ff4d4d;
     border: none;
     color: white;
-    /* font-size: 20px; */
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -120,14 +108,19 @@
 }
 
 .custom-arrow.left {
-    left: calc(50% - 200px);
+    left: 0;
 }
 
 .custom-arrow.right {
-    right: calc(50% - 200px);
+    right: 0;
 }
 
-
+.icon-img {
+    width: 55px;
+    height: 55px;
+    display: block;
+    margin: 0 auto 25px;
+}
 
 /* HOVER */
 .custom-arrow:hover {
@@ -136,16 +129,35 @@
 }
 
 /* Mobile Fix 🔥 */
-@media (max-width: 768px) {
-    .carousel-wrapper {
-        max-width: 90%;
+@media (max-width:768px) {
+
+    .heading {
+        font-size: 32px;
     }
 
-    .custom-arrow.left {
-        left: 10px;
+    .testimonial-title {
+        font-size: 30px;
     }
 
-    .custom-arrow.right {
-        right: 10px;
+    .testimonial-content p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .custom-arrow {
+        width: 40px;
+        height: 40px;
+    }
+
+    .about-section {
+        padding: 50px 15px;
+    }
+
+    .about-card {
+        padding: 35px 20px;
+    }
+
+    .section-title {
+        font-size: 32px;
     }
 }

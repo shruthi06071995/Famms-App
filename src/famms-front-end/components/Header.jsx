@@ -16,7 +16,7 @@ function Header() {
 
   return (
     <Navbar collapseOnSelect expand="lg" className="header-navbar ">
-      <Container>
+      <Container fluid>
 
         {/* Logo */}
         <Navbar.Brand as={Link} to='/' ><img src={logo} alt="logo" width={250} height={50} className='d-inline-block align-top' /></Navbar.Brand>
