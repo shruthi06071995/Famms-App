@@ -42,10 +42,10 @@
 }
 
 .underline {
-    width: 60px;
+    width: 80px;
     height: 5px;
-    background: #ff4d4d;
-    margin: 10px auto 50px;
+    background: #f7444e;
+    margin: 0 auto 50px;
 }
 
 .carousel-wrapper {
@@ -116,10 +116,9 @@
 }
 
 .icon-img {
-    width: 55px;
-    height: 55px;
-    display: block;
-    margin: 0 auto 25px;
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
 }
 
 /* HOVER */
