@@ -183,7 +183,7 @@ function Home({ products = [], productsLoading, productsError }) {
             <section>
                 <div>
                     <Container>
-                        <h2 className="section-title1">Our <span>Product</span></h2>
+                        <h2 className="section-title">Our <span>Product</span></h2>
                         <Row className="g-4">
                             {products.map((prod) => (
                                 <Col lg={3} md={4} sm={6} xs={12} key={prod.id}>

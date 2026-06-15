@@ -1,0 +1,76 @@
+.about-section {
+    text-align: center;
+    padding: 80px 0;
+    background: #fff;
+}
+
+.about-row {
+    justify-content: center;
+}
+
+.about-card {
+    background: #002c3e;
+    color: white;
+    border-radius: 5px;
+    padding: 40px 25px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ARRIVAL */
+
+.arrival-section-about {
+    background: #d4ced0;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.arrival-row-about {
+    min-height: 550px;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.arrival-section-about .container {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.arrival-img-about {
+    text-align: center;
+}
+
+.arrival-img-about img {
+    width: 100%;
+    max-width: 650px;
+    height: auto;
+}
+
+.arrival-content-about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.arrival-content-about h1 {
+    color: #002c3e;
+    font-size: 60px;
+    font-weight: 700;
+}
+
+.arrival-content-about p {
+    font-size: 18px;
+    color: #444;
+    line-height: 1.8;
+}
+
+.shop-btn {
+    background: #f7444e;
+    border: none;
+    color: white;
+    padding: 12px 40px;
+    width: fit-content;
+}

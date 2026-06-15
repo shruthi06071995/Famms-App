@@ -1,6 +1,7 @@
 import { Container, Card, Col, Row } from "react-bootstrap";
 import '../pages/pages.css'
-import '../home/Home.css'
+// import '../home/Home.css'
+import '../pages/About.css'
 import truck from '../../assets/truck.png'
 import free from '../../assets/free.png'
 import award from '../../assets/reward.png'
@@ -56,11 +57,11 @@ function About() {
             </section>
 
             {/* Arrival Section  */}
-            <section className="arrival-section">
+            <section className="arrival-section-about">
                 <Container>
-                    <Row className="align-items-center arrival-row">
+                    <Row className="arrival-row-about">
 
-                        <Col md={7} className="arrival-img">
+                        <Col md={7} className="arrival-img-about">
                             <img
                                 src={arrival}
                                 alt="arrival"
@@ -68,12 +69,14 @@ function About() {
                             />
                         </Col>
 
-                        <Col md={5} className="arrival-content">
+                        <Col md={5} className="arrival-content-about">
                             <h1>#NewArrivals</h1>
 
                             <p>
                                 Vitae fugiat laboriosam officia perferendis provident
-                                aliquid voluptatibus dolorem...
+                                aliquid voluptatibus dolorem, fugit ullam sit earum
+                                id eaque nisi hic? Tenetur commodi, nisi rem vel,
+                                ea eaque ab ipsa, autem similique ex unde!
                             </p>
 
                             <button className="shop-btn">
@@ -83,7 +86,7 @@ function About() {
 
                     </Row>
                 </Container>
-            </section>
+            </section >
             {/* Arrival Section ends  */}
         </>
     );
