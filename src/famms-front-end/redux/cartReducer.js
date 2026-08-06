@@ -7,13 +7,32 @@ export const cartReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case "ADD_TO_CART":
+
+    const existingProduct = state.cartItems.find(
+      item => item.id === action.payload.product.id
+    );
+
+    if (existingProduct) {
+      return {
+        ...state, 
+        cartItems: state.cartItems.map(item => 
+          item.id === action.payload.product.id
+          ? {
+            ...item,
+            quantity: item.quantity + action.payload.quantity,
+          }
+          : item
+        ),
+      };
+    }
+
       return {
         ...state,
         cartItems: [
           ...state.cartItems,
           {
-            ...action.payload,
-            quantity: 1,
+            ...action.payload.product,
+            quantity: action.payload.quantity,
           },
         ],
       };

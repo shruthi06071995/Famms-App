@@ -2,16 +2,8 @@ import express from "express";
 
 import products from "../../data/productsData.js";
 
-import {
-  getProducts,
-  getProductById,
-  createProduct,
-  updateProduct,
-  deleteProduct,
-  searchProducts,
-  sortProducts,
-  filterProducts,
-} from "../controllers/productController.js";
+import { getProducts, getProductById, createProduct, updateProduct, deleteProduct, searchProducts, sortProducts, filterProducts } from "../controllers/productController.js";
+import { protect } from "../middleware/authMiddware.js";
 
 const router = express.Router();
 
@@ -40,10 +32,10 @@ router.get("/filter/category", (req, res) => {
 
 router.get("/:id", getProductById);
 
-router.post("/", createProduct);
+router.post("/", protect, createProduct);
 
-router.put("/:id", updateProduct);
+router.put("/:id", protect, updateProduct);
 
-router.delete("/:id", deleteProduct);
+router.delete("/:id", protect, deleteProduct);
 
 export default router;

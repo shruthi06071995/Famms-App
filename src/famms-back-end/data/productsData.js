@@ -33,6 +33,7 @@ const productsData = [
         price: 2350,
         image: "p5.png",
         category: "women",
+        description: "Beautiful Black dress for a party wear"
     },
     {
         id: 6,
@@ -40,6 +41,7 @@ const productsData = [
         price: 3750,
         image: "p6.png",
         category: "women",
+        description: "Beautiful stylish dress as party wear"
     },
     {
         id: 7,
@@ -47,6 +49,7 @@ const productsData = [
         price: 5000,
         image: "p7.png",
         category: "women",
+        description: "Beautiful stylish dress as party wear"
     },
     {
         id: 8,
@@ -54,6 +57,7 @@ const productsData = [
         price: 750,
         image: "p8.png",
         category: "men",
+        description: "Mens Casual Wear shirt with nice elegant colour"
     },
     {
         id: 9,
@@ -61,6 +65,7 @@ const productsData = [
         price: 550,
         image: "p9.png",
         category: "men",
+        description: "Mens stylish Wear shirt with nice elegant style"
     },
     {
         id: 10,
@@ -68,6 +73,7 @@ const productsData = [
         price: 660,
         image: "p10.png",
         category: "men",
+        description: "Mens Wear shirt with nice elegant colour"
     },
     {
         id: 11,
@@ -75,6 +81,7 @@ const productsData = [
         price: 450,
         image: "p11.png",
         category: "men",
+        description: "Mens formal Wear shirt with nice elegant attractive colour"
     },
     {
         id: 12,
@@ -82,6 +89,7 @@ const productsData = [
         price: 5650,
         image: "p12.png",
         category: "women",
+        description: "Women Party Dress with nice elegant attractive colour"
     },
 ];
 

@@ -4,15 +4,55 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../../assets/logo.png';
 import { FaShoppingCart, FaSearch } from "react-icons/fa";
+
 import './Header.css'
-import { Link } from 'react-router-dom';
+
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 function Header() {
 
   const cartItems = useSelector(
+
     state => state.cart.cartItems
+
   );
+
+  const [userInfo, setUserInfo] = useState(
+
+    JSON.parse(localStorage.getItem("userInfo"))
+
+  );
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+
+    const syncUserInfo = () => {
+
+      setUserInfo(JSON.parse(localStorage.getItem("userInfo")));
+
+    };
+
+    window.addEventListener("userInfoChanged", syncUserInfo);
+
+    return () => {
+
+      window.removeEventListener("userInfoChanged", syncUserInfo);
+
+    };
+
+  }, []);
+
+  const handleLogout = () => {
+
+    localStorage.removeItem("userInfo");
+    window.dispatchEvent(new Event("userInfoChanged"));
+
+    navigate("/login");
+    
+  };
 
   return (
     <Navbar collapseOnSelect expand="lg" className="header-navbar ">
@@ -35,8 +75,20 @@ function Header() {
             <Nav.Link as={Link} to="/products">PRODUCTS</Nav.Link>
             <Nav.Link as={Link} to="/blog">BLOG</Nav.Link>
             <Nav.Link as={Link} to="/contact">CONTACT</Nav.Link>
-            <Nav.Link as={Link} to="/login">LOGIN</Nav.Link>
 
+            {/* 👇 Conditional: only show Add Product link if logged in */}
+            {userInfo && (
+              <Nav.Link as={Link} to="/admin/add-product">ADD PRODUCT</Nav.Link>
+            )}
+
+            {/* 👇 Conditional: LOGIN link vs LOGOUT button */}
+            {userInfo ? (
+              <Nav.Link onClick={handleLogout} style={{ cursor: "pointer" }}>
+                LOGOUT
+              </Nav.Link>
+            ) : (
+              <Nav.Link as={Link} to="/login">LOGIN</Nav.Link>
+            )}
 
             {/* Nav-Icons */}
             <Nav.Link as={Link} to="/cart">

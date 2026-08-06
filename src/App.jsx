@@ -13,6 +13,8 @@ import Login from "./famms-front-end/add-on/Login";
 import productsData from "./famms-back-end/data/productsData";
 import { Route, Routes } from "react-router-dom";
 import ProductDetails from "./famms-front-end/products/ProductDetails";
+import AddProduct from "./famms-front-end/admin/AddProduct";
+import ProtectedRoute from "./famms-front-end/components/ProtectedRoute";
 import { useEffect, useState } from "react";
 
 
@@ -78,21 +80,30 @@ function App() {
             />
           }
         />
+
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/search" element={<Search
+          products={products}
+          productsLoading={productsLoading}
+          productsError={productsError}
+        />
+        }
+        />
+
+        {/* Protected Route  */}
         <Route
-          path="/search"
+          path="/admin/add-product"
           element={
-            <Search
-              products={products}
-              productsLoading={productsLoading}
-              productsError={productsError}
-            />
+            <ProtectedRoute>
+              <AddProduct />
+            </ProtectedRoute>
           }
         />
       </Routes>
+      
       <Full />
     </>
   );
