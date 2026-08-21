@@ -3,13 +3,14 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../../assets/logo.png';
-import { FaShoppingCart, FaSearch } from "react-icons/fa";
+import { FaShoppingCart, FaSearch, FaUserCircle } from "react-icons/fa";
 
 import './Header.css'
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import axios from "axios";
 
 function Header() {
 
@@ -27,6 +28,8 @@ function Header() {
 
   const navigate = useNavigate();
 
+  const [wishlistCount, setWishlistCount] = useState(0);
+
   useEffect(() => {
 
     const syncUserInfo = () => {
@@ -35,12 +38,15 @@ function Header() {
 
     };
 
+    syncUserInfo();
+    fetchWishlistCount();
+
     window.addEventListener("userInfoChanged", syncUserInfo);
+    window.addEventListener("wishlistUpdated", fetchWishlistCount);
 
     return () => {
-
       window.removeEventListener("userInfoChanged", syncUserInfo);
-
+      window.removeEventListener("wishlistUpdated", fetchWishlistCount);
     };
 
   }, []);
@@ -51,7 +57,34 @@ function Header() {
     window.dispatchEvent(new Event("userInfoChanged"));
 
     navigate("/login");
-    
+
+  };
+
+  const fetchWishlistCount = async () => {
+
+    try {
+
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+      if (!userInfo) return;
+
+      const { data } = await axios.get(
+        "http://localhost:5000/api/users/wishlist",
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+
+      setWishlistCount(data.length);
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+
   };
 
   return (
@@ -72,22 +105,51 @@ function Header() {
               <NavDropdown.Item className='dropdown-items' as={Link} to="/pages/about">About</NavDropdown.Item>
               <NavDropdown.Item className='dropdown-items' as={Link} to="/pages/testimonial">Testimonial</NavDropdown.Item>
             </NavDropdown>
+
             <Nav.Link as={Link} to="/products">PRODUCTS</Nav.Link>
             <Nav.Link as={Link} to="/blog">BLOG</Nav.Link>
             <Nav.Link as={Link} to="/contact">CONTACT</Nav.Link>
 
+            <NavDropdown
+              title={<FaUserCircle size={22} />}
+              id="user-dropdown"
+              align="end"
+            >
+              <NavDropdown.Item as={Link} to="/profile">
+                My Profile
+              </NavDropdown.Item>
+
+              <NavDropdown.Item as={Link} to="/myorders">
+                My Orders
+              </NavDropdown.Item>
+
+              <NavDropdown.Item as={Link} to="/wishlist">
+                Wishlist ({wishlistCount})
+              </NavDropdown.Item>
+
+              <NavDropdown.Divider />
+
+              <NavDropdown.Item onClick={handleLogout}>
+                Logout
+              </NavDropdown.Item>
+            </NavDropdown>
+
             {/* 👇 Conditional: only show Add Product link if logged in */}
-            {userInfo && (
+            {userInfo?.role === "admin" && (
               <Nav.Link as={Link} to="/admin/add-product">ADD PRODUCT</Nav.Link>
             )}
 
-            {/* 👇 Conditional: LOGIN link vs LOGOUT button */}
-            {userInfo ? (
-              <Nav.Link onClick={handleLogout} style={{ cursor: "pointer" }}>
-                LOGOUT
+            {userInfo?.role === "admin" && (
+              <Nav.Link as={Link} to="/admin/orders">
+                ALL ORDERS
               </Nav.Link>
-            ) : (
-              <Nav.Link as={Link} to="/login">LOGIN</Nav.Link>
+            )}
+
+            {/* 👇 Conditional: LOGIN link vs LOGOUT button */}
+            {!userInfo && (
+              <Nav.Link as={Link} to="/login">
+                LOGIN
+              </Nav.Link>
             )}
 
             {/* Nav-Icons */}

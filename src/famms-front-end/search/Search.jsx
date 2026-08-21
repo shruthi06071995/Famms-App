@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Row, Col } from "react-bootstrap";
+import ProductCard from "../products/ProductCard";
 
 function Search({ products = [], productsLoading, productsError }) {
 
@@ -25,15 +27,34 @@ function Search({ products = [], productsLoading, productsError }) {
       />
 
       <div className="mt-4">
+
         {productsLoading && <p>Loading products...</p>}
+
         {!productsLoading && productsError && (
           <p className="text-danger">{productsError}</p>
         )}
-        {filteredProducts.map(product => (
-          <p key={product.id}>
-            {product.title}
-          </p>
-        ))}
+
+        <Row className="g-4">
+
+          {filteredProducts.map((product) => (
+
+            <Col
+              xl={3}
+              lg={3}
+              md={4}
+              sm={6}
+              xs={12}
+              key={product._id}
+            >
+
+              <ProductCard product={product} />
+
+            </Col>
+
+          ))}
+
+        </Row>
+
       </div>
 
     </div>

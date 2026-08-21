@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-const ProtectedRoute = ({ children }) => {
+const UserProtectedRoute = ({ children }) => {
 
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
@@ -9,11 +9,7 @@ const ProtectedRoute = ({ children }) => {
         return <Navigate to="/login" replace />;
     }
 
-    if (userInfo.role !== "admin") {
-        return <Navigate to="/" replace />;
-    }
-
     return children;
 };
 
-export default ProtectedRoute;
+export default UserProtectedRoute;

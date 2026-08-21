@@ -1,109 +1,113 @@
-import products from "../../data/productsData.js";
+import Product from "../models/productModel.js";
+import asyncHandler from "express-async-handler";
 
-export const getProducts = (req, res) => {
+// GET ALL PRODUCTS
+export const getProducts = asyncHandler(async (req, res) => {
+
+  const products = await Product.find();
   res.json(products);
-};
 
-export const getProductById = (req, res) => {
-  const product = products.find(
-    (p) => p.id === Number(req.params.id)
-  );
+});
+
+// GET SINGLE PRODUCT
+export const getProductById = asyncHandler(async (req, res) => {
+
+  const product = await Product.findById(req.params.id);
 
   if (!product) {
-    return res.status(404).json({
-      message: "Product not found",
-    });
+    res.status(404);
+    throw new Error("Product not found");
   }
 
   res.json(product);
-};
 
-export const createProduct = (req, res) => {
+});
 
-  const newProduct = {
-    id: products.length + 1,
-    ...req.body
-  };
+// CREATE PRODUCT
+export const createProduct = asyncHandler(async (req, res) => {
 
-  products.push(newProduct);
+  const createdProduct = await Product.create(req.body);
 
-  res.status(201).json(newProduct);
+  res.status(201).json(createdProduct);
 
-}
+});
 
-export const updateProduct = (req, res) => {
+// UPDATE PRODUCT
+export const updateProduct = asyncHandler(async (req, res) => {
 
-  const id = Number(req.params.id);
+  const product = await Product.findById(req.params.id);
 
-  const index = products.findIndex(
-    p => p.id === id
-  );
-
-  if (index === -1) {
-    return res.status(404).json({
-      message: "Product not found"
-    });
+  if (!product) {
+    res.status(404);
+    throw new Error("Product not found");
   }
 
-  products[index] = {
-    ...products[index],
-    ...req.body
-  };
+  Object.assign(product, req.body);
 
-  res.json(products[index]);
+  const updatedProduct = await product.save();
 
-}
+  res.json(updatedProduct);
 
-export const deleteProduct = (req, res) => {
+});
 
-  const id = Number(req.params.id);
+// DELETE PRODUCT
+export const deleteProduct = asyncHandler(async (req, res) => {
 
-  const index = products.findIndex(
-    p => p.id === id
-  );
+  const product = await Product.findById(req.params.id);
 
-  if (index === -1) {
-    return res.status(404).json({
-      message: "Product not found"
-    });
+  if (!product) {
+    res.status(404);
+    throw new Error("Product not found");
   }
 
-  products.splice(index, 1);
+  await product.deleteOne();
 
-  res.json({
-    message: "Product deleted"
-  });
+  res.json({ message: "Product deleted" });
 
-}
+});
 
-export const searchProducts = (req, res) => {
+// SEARCH PRODUCTS
+export const searchProducts = asyncHandler(async (req, res) => {
+
   const keyword = req.query.keyword || "";
 
-  const filteredProducts = products.filter((product) =>
-    (product.title || "")
-      .toLowerCase()
-      .includes(keyword.toLowerCase())
-  );
+  const products = await Product.find({
+    title: {
+      $regex: keyword,
+      $options: "i"
+    }
+  });
 
-  res.json(filteredProducts);
-};
+  res.json(products);
 
-export const filterProducts = (req, res) => {
+});
+
+// FILTER PRODUCTS
+export const filterProducts = asyncHandler(async (req, res) => {
+
   const { category } = req.query;
 
-  const filteredProducts = products.filter(
-    product =>
-      product.category.toLowerCase() ===
-      category.toLowerCase()
-  );
+  if (!category) {
+    return res.status(400).json({
+      message: "Category is required",
+    });
+  }
 
-  res.json(filteredProducts);
-};
+  const products = await Product.find({ category });
 
-export const sortProducts = (req, res) => {
-  const sortedProducts = [...products].sort(
-    (a, b) => a.price - b.price
-  );
+  res.json(products);
 
-  res.json(sortedProducts);
-};
+});
+
+// SORT PRODUCTS
+export const sortProducts = asyncHandler(async (req, res) => {
+
+  const order = req.query.order === "desc" ? -1 : 1;
+
+  const products = await Product.find().sort({
+    price: order,
+  });
+
+  res.json(products);
+
+});

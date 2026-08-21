@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import User from "../../models/userModel.js";
+import User from "../models/userModel.js";
 
 export const protect = async (req, res, next) => {
   let token;
@@ -15,14 +15,37 @@ export const protect = async (req, res, next) => {
 
       req.user = await User.findById(decoded.id).select("-password");
 
-      next();
+      return next();
+
     } catch (error) {
-      console.error(error);
-      res.status(401).json({ message: "Not authorized, token failed" });
+
+      res.status(401).json({
+
+        message: "Not authorized, token failed"
+
+      });
     }
   }
 
-  if (!token) {
-    res.status(401).json({ message: "Not authorized, no token" });
-  }
+  return res.status(401).json({
+
+    message: "Not authorized, no token",
+
+  });
 };
+
+export const admin = (req, res, next) => {
+
+  if (req.user && req.user.role === "admin") {
+
+    next();
+
+  } else {
+
+    res.status(401);
+
+    throw new Error("Admin only");
+
+  }
+
+}

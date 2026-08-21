@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
 
-const AddProduct = () => {
+const AddProduct = ({ fetchProducts }) => {
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("");
     const [image, setImage] = useState("");
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const [description, setDescription] = useState("");
 
     const navigate = useNavigate();
 
@@ -47,7 +48,7 @@ const AddProduct = () => {
                     price: Number(price),
                     category,
                     image,
-
+                    description,
                 }),
 
             });
@@ -62,10 +63,8 @@ const AddProduct = () => {
             }
 
             setSuccess("Product added successfully!");
-            setTitle("");
-            setPrice("");
-            setCategory("");
-            setImage("");
+            await fetchProducts();
+            navigate("/admin/products")
 
         } catch (err) {
 
@@ -73,7 +72,14 @@ const AddProduct = () => {
 
         }
 
+        setTimeout(() => {
+            navigate("/admin/products");
+        }, 1000);
+
     };
+
+   
+
 
     return (
 
@@ -140,6 +146,19 @@ const AddProduct = () => {
                         onChange={(e) => setImage(e.target.value)}
 
                     />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+
+                    <Form.Label>Description</Form.Label>
+
+                    <Form.Control
+                        as="textarea"
+                        rows={3}
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+
                 </Form.Group>
 
                 {error && <p className="text-danger">{error}</p>}

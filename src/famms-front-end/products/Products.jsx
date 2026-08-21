@@ -2,23 +2,18 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import "./Products.css";
 import { Col, Container, Form, Row } from "react-bootstrap";
-import products from "../../famms-back-end/data/productsData";
 
 function Products({
   products = [],
   productsLoading = false,
   productsError = "",
+  fetchProducts,
 }) {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const [category, setCategory] = useState("");
-  const [productsData, setProducts] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:5000/api/products")
-      .then(res => res.json())
-      .then(data => setProducts(data))
-  }, []);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 8;
 
   const filteredProducts = products
     .filter((prod) => {
@@ -33,6 +28,21 @@ function Products({
       if (sort === "high") return b.price - a.price;
       return 0;
     });
+
+  // Pagination
+  const lastProductIndex = currentPage * productsPerPage;
+  const firstProductIndex = lastProductIndex - productsPerPage;
+
+  const currentProducts = filteredProducts.slice(
+    firstProductIndex,
+    lastProductIndex
+  );
+
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, sort, category]);
 
   return (
     <>
@@ -85,20 +95,69 @@ function Products({
         {!productsLoading && productsError && (
           <p className="text-center text-danger mt-4">{productsError}</p>
         )}
-        <Row className="products">
-          {filteredProducts.map((prod) => (
+        <Row className="products g-4">
+          {currentProducts.map((prod) => (
+
             <Col xl={3}
               lg={3}
               md={4}
               sm={6}
               xs={12}
-              key={prod.id}>
-              <ProductCard product={prod} />
+              key={prod._id}>
+
+              <ProductCard product={prod} fetchProducts={fetchProducts} />
+
             </Col>
+
           ))}
         </Row>
         {!productsLoading && filteredProducts.length === 0 && (
-          <p className="text-center mt-4">No products match your filters.</p>
+          <p className="text-center mt-4">
+
+            No products match your filters.
+
+          </p>
+        )}
+
+        {totalPages > 1 && (
+          <div className="d-flex justify-content-center mt-5 gap-2 flex-wrap">
+
+            <button
+              className="btn btn-outline-danger"
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(currentPage - 1)}
+            >
+
+              Previous
+
+            </button>
+
+            {[...Array(totalPages)].map((_, index) => (
+
+              <button
+                key={index}
+                className={`btn ${currentPage === index + 1
+                  ? "btn-danger"
+                  : "btn-outline-danger"
+                  }`}
+                onClick={() => setCurrentPage(index + 1)}
+              >
+                {index + 1}
+              </button>
+
+            ))}
+
+            <button
+              className="btn btn-outline-danger"
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(currentPage + 1)}
+            >
+
+              Next
+
+            </button>
+
+          </div>
         )}
 
       </Container>

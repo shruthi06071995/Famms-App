@@ -1,4 +1,3 @@
-
 const initialState = {
   cartItems: []
 };
@@ -8,23 +7,23 @@ export const cartReducer = (state = initialState, action) => {
 
     case "ADD_TO_CART":
 
-    const existingProduct = state.cartItems.find(
-      item => item.id === action.payload.product.id
-    );
+      const existingProduct = state.cartItems.find(
+        item => item._id === action.payload.product._id
+      );
 
-    if (existingProduct) {
-      return {
-        ...state, 
-        cartItems: state.cartItems.map(item => 
-          item.id === action.payload.product.id
-          ? {
-            ...item,
-            quantity: item.quantity + action.payload.quantity,
-          }
-          : item
-        ),
-      };
-    }
+      if (existingProduct) {
+        return {
+          ...state,
+          cartItems: state.cartItems.map(item =>
+            item._id === action.payload.product._id
+              ? {
+                ...item,
+                quantity: item.quantity + action.payload.quantity,
+              }
+              : item
+          ),
+        };
+      }
 
       return {
         ...state,
@@ -72,6 +71,12 @@ export const cartReducer = (state = initialState, action) => {
         cartItems: state.cartItems.filter(
           (_, index) => index !== action.payload
         ),
+      };
+
+    case "CLEAR_CART":
+      return {
+        ...state,
+        cartItems: [],
       };
 
     default:

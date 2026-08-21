@@ -52,7 +52,7 @@ function Home({ products = [], productsLoading, productsError }) {
 
     return (
         <>
-        {/* First Section Content Starts  */}
+            {/* First Section Content Starts  */}
             <Carousel>
 
                 <Carousel.Item>
@@ -184,11 +184,15 @@ function Home({ products = [], productsLoading, productsError }) {
                 <div>
                     <Container>
                         <h2 className="section-title">Our <span>Product</span></h2>
+
+                        <h3>Total Products : {products.length}</h3>
+
                         <Row className="g-4">
                             {products.map((prod) => (
-                                <Col lg={3} md={4} sm={6} xs={12} key={prod.id}>
+                                <Col lg={3} md={4} sm={6} xs={12} key={prod._id}>
                                     <ProductCard product={prod} />
                                 </Col>
+
                             ))}
                         </Row>
                         {productsLoading && <p className="text-center mt-4">Loading products...</p>}

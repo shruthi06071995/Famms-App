@@ -5,43 +5,75 @@ const userSchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            require:true,
+            required: true,
         },
-        
+
         email: {
             type: String,
-            require: true,
+            required: true,
             unique: true,
         },
 
         password: {
             type: String,
-            require: true,
+            required: true,
         },
+
+        role: {
+            type: String,
+            enum: ["user", "admin"],
+            default: "user",
+        },
+
+        phone: {
+            type: String,
+            default: "",
+        },
+
+        address: {
+            type: String,
+            default: "",
+        },
+
+        city: {
+            type: String,
+            default: "",
+        },
+
+        state: {
+            type: String,
+            default: "",
+        },
+
+        pincode: {
+            type: String,
+            default: "",
+        },
+
+        wishlist: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Product",
+            },
+        ],
     },
-
     {
-        timestamps: true
+        timestamps: true,
     }
-
 );
 
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function () {
 
     if (!this.isModified("password")) {
-
-        next();
         return;
-
     }
 
     const salt = await bcrypt.genSalt(10);
-
     this.password = await bcrypt.hash(this.password, salt);
 
 });
 
-userSchema.methods.matchPassword = async function ( enteredPassword ) {
+userSchema.methods.matchPassword = async function (enteredPassword) {
 
     return await bcrypt.compare(enteredPassword, this.password);
 

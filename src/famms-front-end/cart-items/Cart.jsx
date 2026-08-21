@@ -1,11 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
 
   const cartItems = useSelector(
     state => state?.cart?.cartItems || []
   );
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // TOTAL PRICE 
   const totalAmount = cartItems.reduce((acc, item) => {
@@ -28,10 +31,38 @@ function Cart() {
             key={index}
             className="d-flex justify-content-between align-items-center border-bottom py-3"
           >
-            <div>
-              <h6>{item.title}</h6>
-              <small>₹ {item.price} * {item.quantity || 1}</small>
-              <h6 className="mt-2">₹ {item.price * (item.quantity || 1)}</h6>
+            <div className="d-flex align-items-center">
+
+              <img
+                src={item.image}
+                alt={item.title}
+                style={{
+                  width: "90px",
+                  height: "90px",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                  marginRight: "20px",
+                }}
+              />
+
+              <div>
+
+                <h5>{item.title}</h5>
+
+                <p className="mb-1">
+                  Price : ₹ {item.price}
+                </p>
+
+                <p className="mb-1">
+                  Stock : {item.countInStock}
+                </p>
+
+                <h6 className="text-danger">
+                  Total : ₹ {item.price * (item.quantity || 1)}
+                </h6>
+
+              </div>
+
             </div>
 
             <div className="d-flex align-items-center gap-2">
@@ -83,6 +114,20 @@ function Cart() {
 
         <div className="mt-4 text-end">
           <h4>Total: ₹ {totalAmount.toFixed(2)}</h4>
+        </div>
+
+        <div className="text-end mt-3">
+
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              console.log("Button Clicked");
+              navigate("/checkout");
+            }}
+          >
+            Proceed to Checkout
+          </button>
+
         </div>
 
       </div>

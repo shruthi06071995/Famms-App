@@ -16,7 +16,7 @@ function ProductModal({ show, handleClose, product, onAddToCart }) {
     };
 
     return (
-        <Modal show={show} onHide={handleClose} centered>
+        <Modal show={show} onHide={handleClose} centered size="lg">
             <Modal.Header closeButton>
                 <Modal.Title>
                     Product Details
@@ -30,7 +30,17 @@ function ProductModal({ show, handleClose, product, onAddToCart }) {
                     <Row>
 
                         <Col md={5}>
-                            <img src={product.image} alt={product.title} className="img-fluid mb-3" />
+
+                            <img
+                                src={
+                                    product.image.startsWith("http")
+                                        ? product.image
+                                        : `/${product.image}`
+                                }
+                                alt={product.title}
+                                className="img-fluid"
+                            />
+
                         </Col>
 
                         <Col md={7}>
@@ -48,6 +58,10 @@ function ProductModal({ show, handleClose, product, onAddToCart }) {
                             </h5>
 
                             <p>
+                                <strong>Stock:</strong> {product.countInStock}
+                            </p>
+
+                            <p>
                                 <strong>Description</strong>
                             </p>
 
@@ -57,14 +71,37 @@ function ProductModal({ show, handleClose, product, onAddToCart }) {
 
                                 <strong>Quantity:</strong>
 
-                                <Button variant="outline-secondary" onClick={decreaseQuantity}>-</Button>
+                                <Button
+                                    variant="outline-secondary"
+                                    onClick={decreaseQuantity}
+                                    disabled={quantity === 1}
+                                >
+                                    -
+                                </Button>
 
                                 <span className="fs-5 fw-bold">{quantity}</span>
 
-                                <Button variant="outline-secondary" onClick={increaseQuantity}>+</Button>
+                                <Button
+                                    variant="outline-secondary"
+                                    onClick={increaseQuantity}
+                                    disabled={quantity >= product.countInStock}
+                                >
+                                    +
+                                </Button>
                             </div>
 
-                            <Button onClick={() => {onAddToCart(product, quantity); handleClose();}}>Add To Cart</Button>
+                            <div className="mt-4">
+                                <Button
+                                    variant="danger"
+                                    onClick={() => {
+                                        onAddToCart(product, quantity);
+                                        handleClose();
+                                    }}
+                                >
+                                    {product.countInStock === 0 ? "Out of Stock" : "Add To Cart"}
+                                </Button>
+                            </div>
+
                         </Col>
 
                     </Row>
