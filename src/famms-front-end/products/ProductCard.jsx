@@ -10,7 +10,7 @@ import axios from "axios";
 function ProductCard({ product, fetchProducts }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const productName = product.title || product.name || "Product";
+  const productName = product?.title || product?.name || "Product";
   const [showModal, setShowModal] = useState(false);
 
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -141,7 +141,7 @@ function ProductCard({ product, fetchProducts }) {
           <Card.Img
             variant="top"
             src={
-              product.image.startsWith("http")
+              product.image?.startsWith("http")
                 ? product.image
                 : `/${product.image}`
             }
@@ -222,7 +222,7 @@ function ProductCard({ product, fetchProducts }) {
             to={`/products/${product._id}`}
             className="text-decoration-none text-dark"
           >
-            <h5>{product.title}</h5>
+            <h5 className="text-truncate">{productName}</h5>
           </Link>
           <h6>Rs. {product.price}</h6>
         </Card.Body>

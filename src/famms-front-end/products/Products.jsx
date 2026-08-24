@@ -46,7 +46,7 @@ function Products({
 
   return (
     <>
-      <div className="Heading">
+      <div className="heading">
         <h1>Products</h1>
       </div>
 
@@ -103,7 +103,7 @@ function Products({
               md={4}
               sm={6}
               xs={12}
-              key={prod._id}>
+              key={prod._id || prod.id}>
 
               <ProductCard product={prod} fetchProducts={fetchProducts} />
 

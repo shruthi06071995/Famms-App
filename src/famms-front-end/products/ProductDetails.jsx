@@ -21,7 +21,7 @@ function ProductDetails() {
     }, [id]);
 
     const product = productsData.find(
-        (item) => item._id === id
+        (item) => item._id === id || item.id === id
     );
 
     const handleAddToCart = () => {
