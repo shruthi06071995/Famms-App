@@ -2,6 +2,8 @@
 
 A full-stack E-Commerce web application built using the **MERN Stack** (MongoDB, Express.js, React.js, Node.js). The application allows users to browse products, manage their shopping cart, place orders, and provides an Admin Panel to manage products, users, and orders.
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](#) [![Built with React](https://img.shields.io/badge/-React-61DAFB)](#) [![Node.js](https://img.shields.io/badge/-Node.js-339933)](#)
+
 ---
 
 ## 📸 Project Screenshot
@@ -32,13 +34,13 @@ A full-stack E-Commerce web application built using the **MERN Stack** (MongoDB,
 
 ## 📸 Order List 
 
-![Order](./screenshorts//orders.png)
+![Order](./screenshots//orders.png)
 
 ---
 
 ## 📸 Login Page
 
-![Login](./screenshorts/login.png)
+![Login](./screenshots/login.png)
 
 ## 🚀 Live Demo
 
@@ -48,7 +50,7 @@ Backend: *Coming Soon*
 
 ---
 
-# ✨ Features
+# ✨ Key Features
 
 ## 👤 User Features
 
