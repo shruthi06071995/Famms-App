@@ -24,7 +24,7 @@ const AddProduct = ({ fetchProducts }) => {
             return;
         }
 
-        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
 
         // Extra safety check even though ProtectedRoute already handles this
         if (!userInfo || !userInfo.token) {
@@ -36,7 +36,7 @@ const AddProduct = ({ fetchProducts }) => {
 
         try {
 
-            const res = await fetch("http://localhost:5000/api/products", {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

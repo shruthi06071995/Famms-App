@@ -6,6 +6,7 @@ import truck from '../../assets/truck.png'
 import free from '../../assets/free.png'
 import award from '../../assets/reward.png'
 import arrival from '../../assets/arrival.png'
+import { motion } from "framer-motion";
 
 function About() {
     return (

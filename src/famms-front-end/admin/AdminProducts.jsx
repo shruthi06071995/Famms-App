@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
+import toast from "react-hot-toast";
 
 function AdminProducts() {
 
@@ -16,7 +17,7 @@ function AdminProducts() {
     try {
 
       const { data } = await axios.get(
-        "http://localhost:5000/api/products"
+        `${import.meta.env.VITE_API_URL}/api/products`
       );
 
       setProducts(data);
@@ -39,10 +40,10 @@ function AdminProducts() {
 
     try {
 
-      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
 
       const response = await axios.delete(
-        `http://localhost:5000/api/products/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/products/${id}`,
         {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
@@ -58,7 +59,7 @@ function AdminProducts() {
 
       console.log(error);
 
-      alert("Unable to delete product");
+      toast.error("Unable to delete product");
 
     }
 

@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import ProductModal from "../components/ProductModal";
 import { FaShoppingCart, FaBolt, FaEdit, FaTrash, FaHeart, FaRegHeart } from "react-icons/fa";
 import axios from "axios";
+import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
 function ProductCard({ product, fetchProducts }) {
   const dispatch = useDispatch();
@@ -13,27 +15,30 @@ function ProductCard({ product, fetchProducts }) {
   const productName = product?.title || product?.name || "Product";
   const [showModal, setShowModal] = useState(false);
 
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
 
-  const handleAddToCart = (product, quantity) => {
+  const handleAddToCart = (product, quantity, e) => {
 
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const userInfo = JSON.parse(localStorage.getItem("userInfo")|| "null");
 
     if (!userInfo) {
-      alert("Please login first");
+      toast.error("Please login first");
       navigate("/login");
       return;
     }
 
+    animateToCart(e);
     dispatch(addToCart(product, quantity));
+
+    window.dispatchEvent(new Event("cartUpdated"));
   };
 
   const handleBuyNow = () => {
 
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
 
     if (!userInfo) {
-      alert("Please login first");
+      toast.error("Please login first");
       navigate("/login");
       return;
     }
@@ -59,12 +64,12 @@ function ProductCard({ product, fetchProducts }) {
 
     if (!confirmDelete) return;
 
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
 
     try {
 
       const response = await fetch(
-        `http://localhost:5000/api/products/${product._id}`,
+        `${import.meta.env.VITE_API_URL}/api/products/${product._id}`,
         {
           method: "DELETE",
           headers: {
@@ -77,7 +82,7 @@ function ProductCard({ product, fetchProducts }) {
 
       if (response.ok) {
 
-        alert("Product Deleted Successfully");
+        toast.success("Product Deleted Successfully");
 
         fetchProducts();
 
@@ -89,7 +94,7 @@ function ProductCard({ product, fetchProducts }) {
 
     } catch (error) {
 
-      alert("Something went wrong");
+      toast.error("Something went wrong");
 
     }
 
@@ -97,15 +102,15 @@ function ProductCard({ product, fetchProducts }) {
 
   const addToWishlist = async (productId) => {
     try {
-      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
 
       if (!userInfo) {
-        alert("Please login first");
+        toast.error("Please login first");
         return;
       }
 
       await axios.post(
-        `http://localhost:5000/api/users/wishlist/${productId}`,
+        `${import.meta.env.VITE_API_URL}/api/users/wishlist/${productId}`,
         {},
         {
           headers: {
@@ -114,119 +119,169 @@ function ProductCard({ product, fetchProducts }) {
         }
       );
 
-      alert("Added to Wishlist ❤️");
+      toast.success("Added to Wishlist ❤️");
 
       window.dispatchEvent(new Event("wishlistUpdated"));
 
     } catch (error) {
       console.log(error);
-      alert("Something went wrong");
+      toast.error("Something went wrong");
     }
+  };
+
+  const animateToCart = (e) => {
+    const cart = document.getElementById("cart-icon");
+    const img = e.currentTarget.closest(".product-card").querySelector("img");
+
+    if (!cart || !img) return;
+
+    const imgRect = img.getBoundingClientRect();
+    const cartRect = cart.getBoundingClientRect();
+
+    const flyingImg = img.cloneNode(true);
+
+    flyingImg.style.position = "fixed";
+    flyingImg.style.top = imgRect.top + "px";
+    flyingImg.style.left = imgRect.left + "px";
+    flyingImg.style.width = imgRect.width + "px";
+    flyingImg.style.height = imgRect.height + "px";
+    flyingImg.style.zIndex = 1000;
+    flyingImg.style.transition = "all 0.8s ease-in-out";
+    flyingImg.style.borderRadius = "10px";
+
+    document.body.appendChild(flyingImg);
+
+    setTimeout(() => {
+      flyingImg.style.top = cartRect.top + "px";
+      flyingImg.style.left = cartRect.left + "px";
+      flyingImg.style.width = "30px";
+      flyingImg.style.height = "30px";
+      flyingImg.style.opacity = "0.5";
+    }, 10);
+
+    setTimeout(() => {
+      document.body.removeChild(flyingImg);
+    }, 800);
   };
 
   return (
     <>
-      <Card className="product-card h-100"
+      <motion.div
+        whileHover={{ y: -8, scale: 1.03 }}
+        transition={{ type: "spring", stiffness: 200 }}
         style={{ cursor: "pointer" }}
-        onClick={handleOpenModal}
       >
-        <div className="img-wrapper position-relative">
+        <Card
+          className="product-card h-100"
+          onClick={handleOpenModal}
+        >
+          <div className="img-wrapper position-relative">
 
-          {product.countInStock === 0 && (
-            <span className="stock-badge">
-              OUT OF STOCK
-            </span>
-          )}
-
-          <Card.Img
-            variant="top"
-            src={
-              product.image?.startsWith("http")
-                ? product.image
-                : `/${product.image}`
-            }
-          />
-
-          <div className="overlay">
-
-            <Button
-              className="icon-btn"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleAddToCart(product, 1)
-              }}
-              title="Add to Cart"
-              disabled={product.countInStock === 0}
-            >
-              <FaShoppingCart />
-            </Button>
-
-            <Button
-              className="btn btn-outline-danger ms-2"
-              onClick={(e) => {
-                e.stopPropagation();
-                addToWishlist(product._id);
-              }}
-            >
-              <FaRegHeart />
-            </Button>
-
-            <Button
-              className="icon-btn"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleBuyNow();
-              }}
-              title="Buy Now"
-              disabled={product.countInStock === 0}
-            >
-              <FaBolt />
-            </Button>
-
-            {userInfo?.role === "admin" && (
-
-              <Button
-                className="icon-btn"
-                title="Edit Product"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate(`/admin/edit-product/${product._id}`);
-                }}
-              >
-
-                <FaEdit />
-
-              </Button>
+            {product.countInStock === 0 && (
+              <span className="stock-badge">
+                OUT OF STOCK
+              </span>
             )}
 
-            {userInfo?.role === "admin" && (
-              <Button
+
+            <motion.img
+              variant="top"
+              src={
+                product.image?.startsWith("http")
+                  ? product.image
+                  : `/${product.image}`
+              }
+              alt={productName}
+              className="card-img-top"
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.3 }}
+            />
+
+            <div className="overlay">
+
+              <motion.button
                 className="icon-btn"
-                variant="danger"
-                title="Delete Product"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleDelete();
+                  handleAddToCart(product, 1, e)
+                }}
+                title="Add to Cart"
+                disabled={product.countInStock === 0}
+              >
+                <FaShoppingCart />
+              </motion.button>
+
+              <motion.button
+                className="btn btn-outline-danger ms-2"
+                whileTap={{ scale: 1.4 }}
+                whileHover={{ scale: 1.1 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  addToWishlist(product._id);
                 }}
               >
-                <FaTrash />
-              </Button>
-            )}
+                <FaRegHeart />
+              </motion.button>
+
+              <motion.button
+                className="icon-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleBuyNow();
+                }}
+                title="Buy Now"
+                disabled={product.countInStock === 0}
+              >
+                <FaBolt />
+              </motion.button>
+
+              {userInfo?.role === "admin" && (
+
+                <motion.button
+                  className="icon-btn"
+                  title="Edit Product"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate(`/admin/edit-product/${product._id}`);
+                  }}
+                >
+
+                  <FaEdit />
+
+                </motion.button>
+              )}
+
+              {userInfo?.role === "admin" && (
+                <motion.button
+                  className="icon-btn"
+                  variant="danger"
+                  title="Delete Product"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDelete();
+                  }}
+                >
+                  <FaTrash />
+                </motion.button>
+              )}
+
+            </div>
 
           </div>
 
-        </div>
-
-        <Card.Body className="text-center">
-          <Link
-            to={`/products/${product._id}`}
-            className="text-decoration-none text-dark"
-          >
-            <h5 className="text-truncate">{productName}</h5>
-          </Link>
-          <h6>Rs. {product.price}</h6>
-        </Card.Body>
-      </Card>
+          <Card.Body className="text-center">
+            <Link
+              to={`/products/${product._id}`}
+              className="text-decoration-none text-dark"
+            >
+              <h5 className="text-truncate">{productName}</h5>
+            </Link>
+            <h6>Rs. {product.price}</h6>
+          </Card.Body>
+        </Card>
+      </motion.div>
 
       <ProductModal
         show={showModal}

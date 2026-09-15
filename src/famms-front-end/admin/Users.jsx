@@ -11,10 +11,10 @@ function Users() {
 
   const fetchUsers = async () => {
     try {
-      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
 
       const { data } = await axios.get(
-        "http://localhost:5000/api/users",
+        `${import.meta.env.VITE_API_URL}/api/users`,
         {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,

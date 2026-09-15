@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
+import toast from "react-hot-toast";
 
 function EditProduct({ fetchProducts }) {
 
@@ -20,7 +21,7 @@ function EditProduct({ fetchProducts }) {
     // useEffect() 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/api/products/${id}`)
+        fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}`)
             .then(res => res.json())
             .then((data) => {
 
@@ -42,10 +43,10 @@ function EditProduct({ fetchProducts }) {
 
         e.preventDefault();
 
-        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
 
         const response = await fetch(
-            `http://localhost:5000/api/products/${id}`,
+            `${import.meta.env.VITE_API_URL}/api/products/${id}`,
             {
                 method: "PUT",
                 headers: {
@@ -69,7 +70,7 @@ function EditProduct({ fetchProducts }) {
 
             await fetchProducts();
 
-            alert("Product Updated Successfully");
+            toast.success("Product Updated Successfully");
 
             navigate("/admin/products");
             

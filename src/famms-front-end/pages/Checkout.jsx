@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
+import toast from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -22,7 +23,7 @@ function Checkout() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const userInfo = JSON.parse(localStorage.getItem("userInfo")  || "null");
 
     const totalPrice = cartItems.reduce(
         (acc, item) => acc + item.price * item.quantity,
@@ -31,7 +32,7 @@ function Checkout() {
 
     useEffect(() => {
 
-        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
 
         setFormData({
             name: userInfo?.name || "",
@@ -58,7 +59,7 @@ function Checkout() {
         e.preventDefault();
 
         if (cartItems.length === 0) {
-            alert("Your cart is empty");
+            toast.error("Your cart is empty");
             navigate("/products");
             return;
         }
@@ -69,7 +70,7 @@ function Checkout() {
             console.log("Total Price:", totalPrice);
 
             const profileResponse = await fetch(
-                "http://localhost:5000/api/users/profile",
+                `${import.meta.env.VITE_API_URL}/api/users/profile`,
                 {
                     method: "PUT",
                     headers: {
@@ -96,7 +97,7 @@ function Checkout() {
             }
 
             const response = await fetch(
-                "http://localhost:5000/api/orders",
+                `${import.meta.env.VITE_API_URL}/api/orders`,
                 {
                     method: "POST",
 
@@ -136,7 +137,7 @@ function Checkout() {
 
             if (response.ok) {
 
-                alert("Order Placed Successfully");
+                toast.success("Order Placed Successfully");
 
                 dispatch({
                     type: "CLEAR_CART",

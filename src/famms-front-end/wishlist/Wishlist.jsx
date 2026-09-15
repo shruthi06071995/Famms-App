@@ -4,6 +4,7 @@ import { Row, Col, Card, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function Wishlist() {
 
@@ -25,7 +26,7 @@ function Wishlist() {
             const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
             const { data } = await axios.get(
-                "http://localhost:5000/api/users/wishlist",
+                `${import.meta.env.VITE_API_URL}/api/users/wishlist`,
                 {
                     headers: {
                         Authorization: `Bearer ${userInfo.token}`,
@@ -47,10 +48,10 @@ function Wishlist() {
 
         try {
 
-            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+            const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
 
             await axios.delete(
-                `http://localhost:5000/api/users/wishlist/${id}`,
+                `${import.meta.env.VITE_API_URL}/api/users/wishlist/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${userInfo.token}`,
@@ -76,7 +77,7 @@ function Wishlist() {
 
         await removeWishlist(product._id);
 
-        alert("Product added to cart");
+        toast.success("Product added to cart");
 
     };
 

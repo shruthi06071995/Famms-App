@@ -11,6 +11,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import axios from "axios";
+import { motion } from "framer-motion";
 
 function Header() {
 
@@ -64,12 +65,12 @@ function Header() {
 
     try {
 
-      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
 
       if (!userInfo) return;
 
       const { data } = await axios.get(
-        "http://localhost:5000/api/users/wishlist",
+        `${import.meta.env.VITE_API_URL}/api/users/wishlist`,
         {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
@@ -87,85 +88,140 @@ function Header() {
 
   };
 
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <Navbar collapseOnSelect expand="lg" className="header-navbar ">
-      <Container fluid>
+    <>
+      <motion.div
+        initial={{ y: -80 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Navbar collapseOnSelect expand="lg" className={`header-navbar ${scrolled ? "scrolled" : ""}`}>
+          <Container fluid>
 
-        {/* Logo */}
-        <Navbar.Brand as={Link} to='/' ><img src={logo} alt="logo" width={250} height={50} className='d-inline-block align-top' /></Navbar.Brand>
+            {/* Logo */}
+            <Navbar.Brand as={Link} to='/' ><img src={logo} alt="logo" width={250} height={50} className='d-inline-block align-top' /></Navbar.Brand>
 
-        {/* Toggle Button */}
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" className='' />
+            {/* Toggle Button */}
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" className='' />
 
-        {/* Menu */}
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ms-auto nav-menu ">
-            <Nav.Link style={{ color: "#f7444e" }} as={Link} to="/">HOME</Nav.Link>
-            <NavDropdown title="PAGES" id="pages-dropdown">
-              <NavDropdown.Item className='dropdown-items' as={Link} to="/pages/about">About</NavDropdown.Item>
-              <NavDropdown.Item className='dropdown-items' as={Link} to="/pages/testimonial">Testimonial</NavDropdown.Item>
-            </NavDropdown>
+            {/* Menu */}
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="ms-auto nav-menu ">
+                <motion.div whileHover={{ scale: 1.1 }}>
+                  <Nav.Link style={{ color: "#f7444e" }} as={Link} to="/">HOME</Nav.Link>
+                </motion.div>
 
-            <Nav.Link as={Link} to="/products">PRODUCTS</Nav.Link>
-            <Nav.Link as={Link} to="/blog">BLOG</Nav.Link>
-            <Nav.Link as={Link} to="/contact">CONTACT</Nav.Link>
+                <motion.div whileHover={{ scale: 1.1 }}>
+                  <NavDropdown title="PAGES" id="pages-dropdown">
+                    <motion.div whileHover={{ scale: 1.2 }}>
+                      <NavDropdown.Item className='dropdown-items' as={Link} to="/pages/about">About</NavDropdown.Item>
+                      <NavDropdown.Item className='dropdown-items' as={Link} to="/pages/testimonial">Testimonial</NavDropdown.Item>
+                    </motion.div>
+                  </NavDropdown>
+                </motion.div>
 
-            <NavDropdown
-              title={<FaUserCircle size={22} />}
-              id="user-dropdown"
-              align="end"
-            >
-              <NavDropdown.Item as={Link} to="/profile">
-                My Profile
-              </NavDropdown.Item>
+                <motion.div whileHover={{ scale: 1.1 }}>
+                  <Nav.Link as={Link} to="/products">PRODUCTS</Nav.Link>
+                </motion.div>
 
-              <NavDropdown.Item as={Link} to="/myorders">
-                My Orders
-              </NavDropdown.Item>
+                <motion.div whileHover={{ scale: 1.1 }}>
+                  <Nav.Link as={Link} to="/blog">BLOG</Nav.Link>
+                </motion.div>
 
-              <NavDropdown.Item as={Link} to="/wishlist">
-                Wishlist ({wishlistCount})
-              </NavDropdown.Item>
+                <motion.div whileHover={{ scale: 1.1 }}>
+                  <Nav.Link as={Link} to="/contact">CONTACT</Nav.Link>
+                </motion.div>
 
-              <NavDropdown.Divider />
+                <motion.div whileHover={{ scale: 1.2 }}>
+                  <NavDropdown
+                    title={<FaUserCircle className="icon" size={22} />}
+                    id="user-dropdown"
+                    align="end"
+                  >
+                    <motion.div whileHover={{ scale: 1.2 }}>
+                      <NavDropdown.Item as={Link} to="/profile">
+                        My Profile
+                      </NavDropdown.Item>
 
-              <NavDropdown.Item onClick={handleLogout}>
-                Logout
-              </NavDropdown.Item>
-            </NavDropdown>
+                      <NavDropdown.Item as={Link} to="/myorders">
+                        My Orders
+                      </NavDropdown.Item>
 
-            {/* 👇 Conditional: only show Add Product link if logged in */}
-            {userInfo?.role === "admin" && (
-              <Nav.Link as={Link} to="/admin/add-product">ADD PRODUCT</Nav.Link>
-            )}
+                      <NavDropdown.Item as={Link} to="/wishlist">
+                        Wishlist ({wishlistCount})
+                      </NavDropdown.Item>
 
-            {userInfo?.role === "admin" && (
-              <Nav.Link as={Link} to="/admin/orders">
-                ALL ORDERS
-              </Nav.Link>
-            )}
+                      <NavDropdown.Divider />
 
-            {/* 👇 Conditional: LOGIN link vs LOGOUT button */}
-            {!userInfo && (
-              <Nav.Link as={Link} to="/login">
-                LOGIN
-              </Nav.Link>
-            )}
+                      <NavDropdown.Item onClick={handleLogout}>
+                        Logout
+                      </NavDropdown.Item>
+                    </motion.div>
+                  </NavDropdown>
+                </motion.div>
 
-            {/* Nav-Icons */}
-            <Nav.Link as={Link} to="/cart">
-              <FaShoppingCart className='icon' size={20} />
-              {cartItems.length > 0 && (
-                <span className='cart-badge'>{cartItems.length}</span>
-              )}
-            </Nav.Link>
-            <Nav.Link as={Link} to="/search">
-              <FaSearch className='icon' size={18} />
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+                {/* 👇 Conditional: only show Add Product link if logged in */}
+                {userInfo?.role === "admin" && (
+                  <Nav.Link as={Link} to="/admin/add-product">ADD PRODUCT</Nav.Link>
+                )}
+
+                {userInfo?.role === "admin" && (
+                  <Nav.Link as={Link} to="/admin/orders">
+                    ALL ORDERS
+                  </Nav.Link>
+                )}
+
+                {/* 👇 Conditional: LOGIN link vs LOGOUT button */}
+                <motion.div whileHover={{ scale: 1.1 }}>
+                  {!userInfo && (
+                    <Nav.Link as={Link} to="/login">
+                      LOGIN
+                    </Nav.Link>
+                  )}
+                </motion.div>
+
+                {/* Nav-Icons */}
+                <Nav.Link as={Link} to="/cart" style={{ position: "relative" }}>
+                  <div className='cart-icon-wrapper'>
+                    <motion.div whileHover={{ scale: 1.2 }}>
+                      <FaShoppingCart id="cart-icon" className='icon' size={20} />
+                    </motion.div>
+
+                    {cartItems.length > 0 && (
+                      <motion.span
+                        className="cart-badge"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                      >
+                        {cartItems.length}
+                      </motion.span>
+                    )}
+
+                  </div>
+                </Nav.Link>
+
+                <Nav.Link as={Link} to="/search">
+                  <motion.div whileHover={{ scale: 1.2 }}>
+                    <FaSearch className='icon' size={18} />
+                  </motion.div>
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+      </motion.div >
+    </>
   );
 }
 

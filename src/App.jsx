@@ -26,6 +26,7 @@ import Dashboard from "./famms-front-end/admin/Dashboard";
 import adminProducts from "./famms-front-end/admin/adminProducts";
 import Users from "./famms-front-end/admin/Users";
 import AdminProducts from "./famms-front-end/admin/adminProducts";
+import { Toaster } from "react-hot-toast";
 
 
 function App() {
@@ -44,7 +45,9 @@ function App() {
       setProductsLoading(true);
       setProductsError("");
 
-      const response = await fetch("http://localhost:5000/api/products");
+      const BASE_URL = import.meta.env.VITE_API_URL;
+
+const response = await fetch(`${BASE_URL}/api/products`);
 
       if (!response.ok) {
         throw new Error("Failed to load products");
@@ -69,6 +72,7 @@ function App() {
 
   return (
     <>
+      <Toaster position="top-right" />
       <Header />
       <Routes>
         <Route

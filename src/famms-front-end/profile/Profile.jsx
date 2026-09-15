@@ -5,7 +5,7 @@ function Profile() {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
 
     if (userInfo) {
       setUser(userInfo);

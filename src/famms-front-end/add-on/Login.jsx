@@ -24,8 +24,8 @@ const Login = () => {
         }
 
         const url = isRegister
-            ? "http://localhost:5000/api/users/register"
-            : "http://localhost:5000/api/users/login";
+            ? `${import.meta.env.VITE_API_URL}/api/users/register`
+            : `${import.meta.env.VITE_API_URL}/api/users/login`;
 
         const body = isRegister ? { name, email, password } : { email, password };
 

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 function Orders() {
 
     const [orders, setOrders] = useState([]);
 
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
 
     useEffect(() => {
 
@@ -17,7 +18,7 @@ function Orders() {
         try {
 
             const response = await fetch(
-                "http://localhost:5000/api/orders",
+                `${import.meta.env.VITE_API_URL}/api/orders`,
                 {
                     headers: {
                         Authorization: `Bearer ${userInfo.token}`,
@@ -48,7 +49,7 @@ function Orders() {
         try {
 
             const response = await fetch(
-                `http://localhost:5000/api/orders/${id}/deliver`,
+                `${import.meta.env.VITE_API_URL}/api/orders/${id}/deliver`,
                 {
                     method: "PUT",
                     headers: {
@@ -61,7 +62,7 @@ function Orders() {
 
             if (response.ok) {
 
-                alert("Order Delivered Successfully");
+                toast.success("Order Delivered Successfully");
 
                 fetchOrders();
 

@@ -19,7 +19,7 @@ function Dashboard() {
 
         try {
 
-            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+            const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
 
             const config = {
                 headers: {
@@ -28,16 +28,16 @@ function Dashboard() {
             };
 
             const products = await axios.get(
-                "http://localhost:5000/api/products"
+                `${import.meta.env.VITE_API_URL}/api/products`
             );
 
             const orders = await axios.get(
-                "http://localhost:5000/api/orders",
+                `${import.meta.env.VITE_API_URL}/api/orders`,
                 config
             );
 
             const users = await axios.get(
-                "http://localhost:5000/api/users",
+                `${import.meta.env.VITE_API_URL}/api/users`,
                 config
             );
 
