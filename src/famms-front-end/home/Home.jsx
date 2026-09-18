@@ -285,7 +285,7 @@ function Home({ products = [], productsLoading, productsError }) {
                         </Row>
                         {productsLoading && <p className="text-center mt-4">Loading products...</p>}
                         {!productsLoading && productsError && (
-                            <p className="text-center text-danger mt-4">{productsError}</p>
+                            <p className="spinner-border text-center text-danger mt-4">{productsError}</p>
                         )}
                         <div className="text-center mt-4">
                             <Link to="/products">

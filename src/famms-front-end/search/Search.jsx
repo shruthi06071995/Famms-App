@@ -31,7 +31,7 @@ function Search({ products = [], productsLoading, productsError }) {
         {productsLoading && <p>Loading products...</p>}
 
         {!productsLoading && productsError && (
-          <p className="text-danger">{productsError}</p>
+          <p className="spinner-border text-danger">{productsError}</p>
         )}
 
         <Row className="g-4">

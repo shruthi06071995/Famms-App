@@ -16,7 +16,7 @@ function ProductDetails() {
     const [productsData, setProducts] = useState([]);
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}/api/products`)
+        fetch(`${BASE_URL}/api/products`)
             .then(async (res) => {
                 if (!res.ok) throw new Error("Failed to fetch");
                 return res.json();

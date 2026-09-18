@@ -22,7 +22,9 @@ function Products({
       return productName.includes(search.toLowerCase());
     })
     .filter((prod) =>
-      category ? prod.category.toLowerCase() === category.toLowerCase() : true
+      category
+        ? (prod.category || "").toLowerCase() === category.toLowerCase() 
+        : true
     )
     .sort((a, b) => {
       if (sort === "low") return a.price - b.price;
@@ -96,12 +98,12 @@ function Products({
                 md={4}
                 sm={6}
                 xs={12}
+              >
+                <Form.Select
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="filter-input"
+                  style={{ maxWidth: "250px" }}
                 >
-                <Form.Select 
-                onChange={(e) => setCategory(e.target.value)}
-                className="filter-input"
-                style={{ maxWidth: "250px" }}
-                  >
                   <option value="">All Categories</option>
                   <option value="men">Men</option>
                   <option value="women">Women</option>
@@ -120,7 +122,7 @@ function Products({
             </motion.p>
           }
           {!productsLoading && productsError && (
-            <p className="text-center text-danger mt-4">{productsError}</p>
+            <p className="spinner-border text-center text-danger mt-4">{productsError}</p>
           )}
           <motion.div
             initial="hidden"

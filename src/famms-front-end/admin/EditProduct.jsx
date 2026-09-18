@@ -21,7 +21,7 @@ function EditProduct({ fetchProducts }) {
     // useEffect() 
     useEffect(() => {
 
-        fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}`)
+        fetch(`${BASE_URL}/api/products/${id}`)
             .then(res => res.json())
             .then((data) => {
 
@@ -46,7 +46,7 @@ function EditProduct({ fetchProducts }) {
         const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
 
         const response = await fetch(
-            `${import.meta.env.VITE_API_URL}/api/products/${id}`,
+            `${BASE_URL}/api/products/${id}`,
             {
                 method: "PUT",
                 headers: {

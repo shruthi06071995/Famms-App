@@ -15,13 +15,14 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.json({ limit: "10kb" }));
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Famms API Running");
+  res.send("Famms API Running...");
 });
 
 const PORT = process.env.PORT || 5000;

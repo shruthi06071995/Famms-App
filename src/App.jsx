@@ -45,9 +45,7 @@ function App() {
       setProductsLoading(true);
       setProductsError("");
 
-      const BASE_URL = import.meta.env.VITE_API_URL;
-
-const response = await fetch(`${BASE_URL}/api/products`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/products`);
 
       if (!response.ok) {
         throw new Error("Failed to load products");
