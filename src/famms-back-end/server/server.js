@@ -25,6 +25,10 @@ app.get("/", (req, res) => {
   res.send("Famms API Running...");
 });
 
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ message: "Server is healthy" });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.use(notFound);
