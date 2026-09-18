@@ -15,15 +15,27 @@ function Products({
   const [category, setCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 8;
+  const [productList, setProductList] = useState([]);
 
-  const filteredProducts = products
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
+  useEffect(() => {
+    fetch(`${BASE_URL}/api/products`)
+      .then(res => res.json())
+      .then(data => {
+        setProductList(data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+  const filteredProducts = productList
     .filter((prod) => {
       const productName = (prod.title || prod.name || "").toLowerCase();
       return productName.includes(search.toLowerCase());
     })
     .filter((prod) =>
       category
-        ? (prod.category || "").toLowerCase() === category.toLowerCase() 
+        ? (prod.category || "").toLowerCase() === category.toLowerCase()
         : true
     )
     .sort((a, b) => {
@@ -138,6 +150,7 @@ function Products({
               }
             }}
           >
+
             <Row className="products g-4 justify-content-center">
               {currentProducts.map((prod) => (
 
@@ -155,6 +168,7 @@ function Products({
               ))}
             </Row>
           </motion.div>
+
           {!productsLoading && filteredProducts.length === 0 && (
             <motion.p
               className="text-center mt-4"
