@@ -24,7 +24,7 @@ import Profile from "./famms-front-end/profile/Profile";
 import Wishlist from "./famms-front-end/wishlist/Wishlist";
 import Dashboard from "./famms-front-end/admin/Dashboard";
 import Users from "./famms-front-end/admin/Users";
-import AdminProducts from "./famms-front-end/admin/adminProducts";
+import AdminProducts from "./famms-front-end/admin/AdminProducts";
 import { Toaster } from "react-hot-toast";
 
 
