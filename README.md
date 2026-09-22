@@ -44,9 +44,11 @@ A full-stack E-Commerce web application built using the **MERN Stack** (MongoDB,
 
 ## 🚀 Live Demo
 
-Frontend: *Coming Soon*
+## 🔗 Live Demo
+https://your-vercel-link.vercel.app
 
-Backend: *Coming Soon*
+## 🔗 Backend API
+https://famms-backend.onrender.com
 
 ---
 
@@ -157,7 +159,7 @@ Famms-App/
 ## Clone the Repository
 
 ```bash
-git clone https://github.com/shruthi06071995/Famms-App.git
+git clone https://github.com/shruthi06071995/Famms-App
 ```
 
 Go into the project folder
